@@ -10,16 +10,17 @@ import { ArrowRight } from 'lucide-react'
 export default function Hero() {
   return (
     <section className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-black text-white">
-      {/* Background Image with parallax-like styling */}
+      {/* Background Video */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src={brand.heroPath}
-          alt={`${brand.name} Cinematic Wedding Hero`}
-          fill
-          priority
-          className="object-cover object-center opacity-80"
-          sizes="100vw"
-        />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-80"
+        >
+          <source src="/images/hero/hero.mp4" type="video/mp4" />
+        </video>
         {/* Soft Dark Vignette Overlay for premium editorial readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/50 z-10" />
       </div>
@@ -31,7 +32,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="w-12 h-[1px] bg-accent/70 mb-6"
+          className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent mb-6"
         />
 
         {/* Cinematic Subheading */}
@@ -49,7 +50,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: 'easeOut', delay: 0.2 }}
-          className="text-4xl sm:text-6xl md:text-7xl font-heading font-medium tracking-wide mb-6 text-shadow-md max-w-4xl"
+          className="text-4xl sm:text-6xl md:text-7xl font-heading font-medium tracking-wide mb-6 text-white text-shadow-lg max-w-4xl"
         >
           {brand.tagline}
         </motion.h1>
@@ -73,7 +74,7 @@ export default function Hero() {
         >
           <Link
             href="/photos"
-            className="w-full sm:w-auto px-8 py-3.5 bg-white text-black font-semibold text-xs uppercase tracking-widest hover:bg-accent hover:text-black transition-all duration-300 text-center"
+            className="w-full sm:w-auto px-8 py-3.5 bg-accent text-accent-foreground font-semibold text-xs uppercase tracking-widest hover:bg-accent/90 transition-all duration-300 text-center shadow-cinematic"
           >
             View Our Work
           </Link>

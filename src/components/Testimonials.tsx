@@ -18,7 +18,7 @@ export default function Testimonials() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-medium tracking-wide mb-6 text-foreground">
             What Our Couples Say
           </h2>
-          <div className="w-12 h-[1px] bg-accent/80 mx-auto" />
+          <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent mx-auto" />
         </div>
 
         {/* Testimonial Cards Grid */}
@@ -30,10 +30,10 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.6, ease: 'easeOut', delay: idx * 0.15 }}
-              className="bg-secondary/20 p-8 md:p-10 border border-border/40 flex flex-col justify-between items-center text-center relative"
+              className="bg-secondary/20 p-8 md:p-10 border border-border/40 hover:border-accent/30 flex flex-col justify-between items-center text-center relative shadow-cinematic transition-all duration-300"
             >
               {/* Quote Icon */}
-              <div className="text-accent/30 mb-6">
+              <div className="text-accent/40 mb-6">
                 <Quote className="w-8 h-8 rotate-180" />
               </div>
 
@@ -43,7 +43,7 @@ export default function Testimonials() {
               </p>
 
               {/* Divider line */}
-              <div className="w-8 h-[1px] bg-accent/40 mb-6" />
+              <div className="w-8 h-[1px] bg-gradient-to-r from-transparent via-accent/50 to-transparent mb-6" />
 
               {/* Couple Names */}
               <span className="text-xs uppercase tracking-widest font-semibold text-foreground">

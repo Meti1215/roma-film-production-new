@@ -61,7 +61,7 @@ export default function Contact() {
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-medium tracking-wide mb-6 text-foreground">
                 Let's Capture Your Story
               </h2>
-              <div className="w-12 h-[1px] bg-accent/80 mb-8" />
+              <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent mb-8" />
               <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-10 font-light max-w-md">
                 We'd love to hear more about your upcoming wedding, engagement session, or event celebration. Fill out the form or reach out directly to learn more.
               </p>
@@ -73,8 +73,8 @@ export default function Contact() {
                   href={brand.phoneHref}
                   className="flex items-center gap-4 text-foreground/80 hover:text-accent transition-colors duration-200 group"
                 >
-                  <div className="w-10 h-10 border border-border flex items-center justify-center group-hover:border-accent/40 transition-colors">
-                    <Phone className="w-4 h-4" />
+                  <div className="w-10 h-10 border border-border flex items-center justify-center group-hover:border-accent/50 transition-colors shadow-sm">
+                    <Phone className="w-4 h-4 text-accent" />
                   </div>
                   <div>
                     <span className="block text-[8px] uppercase tracking-wider text-muted-foreground font-semibold">Call / Text</span>
@@ -87,8 +87,8 @@ export default function Contact() {
                   href={brand.emailHref}
                   className="flex items-center gap-4 text-foreground/80 hover:text-accent transition-colors duration-200 group"
                 >
-                  <div className="w-10 h-10 border border-border flex items-center justify-center group-hover:border-accent/40 transition-colors">
-                    <Mail className="w-4 h-4" />
+                  <div className="w-10 h-10 border border-border flex items-center justify-center group-hover:border-accent/50 transition-colors shadow-sm">
+                    <Mail className="w-4 h-4 text-accent" />
                   </div>
                   <div>
                     <span className="block text-[8px] uppercase tracking-wider text-muted-foreground font-semibold">Email</span>
@@ -98,8 +98,8 @@ export default function Contact() {
 
                 {/* Location */}
                 <div className="flex items-center gap-4 text-foreground/80">
-                  <div className="w-10 h-10 border border-border flex items-center justify-center">
-                    <MapPin className="w-4 h-4" />
+                  <div className="w-10 h-10 border border-border flex items-center justify-center shadow-sm">
+                    <MapPin className="w-4 h-4 text-accent" />
                   </div>
                   <div>
                     <span className="block text-[8px] uppercase tracking-wider text-muted-foreground font-semibold">Location</span>
@@ -115,7 +115,7 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram Profile"
-                  className="w-10 h-10 border border-border flex items-center justify-center hover:border-accent hover:text-accent transition-all duration-300"
+                  className="w-10 h-10 border border-border flex items-center justify-center hover:border-accent hover:text-accent transition-all duration-300 shadow-sm hover:shadow-cinematic"
                 >
                   <InstagramIcon className="w-4 h-4" />
                 </a>
@@ -124,7 +124,7 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="TikTok Profile"
-                  className="w-10 h-10 border border-border flex items-center justify-center hover:border-accent hover:text-accent transition-all duration-300"
+                  className="w-10 h-10 border border-border flex items-center justify-center hover:border-accent hover:text-accent transition-all duration-300 shadow-sm hover:shadow-cinematic"
                 >
                   <TikTokIcon className="w-4 h-4" />
                 </a>
@@ -132,7 +132,7 @@ export default function Contact() {
             </div>
 
             {/* Google Map Embed Placeholder Container */}
-            <div className="relative w-full h-44 sm:h-52 bg-secondary/30 border border-border overflow-hidden mt-auto">
+            <div className="relative w-full h-44 sm:h-52 bg-secondary/30 border border-accent/20 overflow-hidden mt-auto shadow-cinematic">
               <iframe
                 src={brand.googleMapsEmbedUrl}
                 title="Office Location Map"
@@ -144,8 +144,8 @@ export default function Contact() {
                 referrerPolicy="no-referrer-when-downgrade"
                 className="opacity-75 grayscale contrast-125 hover:opacity-100 hover:grayscale-0 transition-all duration-500"
               />
-              <div className="absolute top-2 left-2 bg-background/80 backdrop-blur-sm px-2 py-1 text-[8px] uppercase tracking-widest font-bold border border-border pointer-events-none">
-                Dallas Office Placeholder
+              <div className="absolute top-2 left-2 bg-background/80 backdrop-blur-sm px-2 py-1 text-[8px] uppercase tracking-widest font-bold border border-accent/30 pointer-events-none">
+                Dallas Office
               </div>
             </div>
           </motion.div>

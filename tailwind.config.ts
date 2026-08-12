@@ -78,13 +78,15 @@ const config: Config = {
         'full': '9999px',
       },
       boxShadow: {
-        'sm': '0 1px 2px 0 rgba(210, 180, 140, 0.06), 0 1px 3px 0 rgba(34, 34, 34, 0.03)',
-        'DEFAULT': '0 2px 8px -1px rgba(34, 30, 26, 0.04), 0 1px 3px -1px rgba(34, 30, 26, 0.02)',
-        'md': '0 4px 16px -2px rgba(34, 30, 26, 0.05), 0 2px 8px -1px rgba(34, 30, 26, 0.03)',
-        'lg': '0 12px 24px -4px rgba(34, 30, 26, 0.06), 0 4px 12px -2px rgba(34, 30, 26, 0.04)',
-        'xl': '0 20px 32px -6px rgba(34, 30, 26, 0.07), 0 8px 20px -4px rgba(34, 30, 26, 0.04)',
-        '2xl': '0 24px 48px -12px rgba(34, 30, 26, 0.08)',
+        'sm': '0 1px 2px 0 rgba(184, 146, 90, 0.06), 0 1px 3px 0 rgba(34, 34, 34, 0.03)',
+        'DEFAULT': '0 2px 8px -1px rgba(184, 146, 90, 0.08), 0 1px 3px -1px rgba(34, 30, 26, 0.02)',
+        'md': '0 4px 16px -2px rgba(184, 146, 90, 0.10), 0 2px 8px -1px rgba(34, 30, 26, 0.03)',
+        'lg': '0 12px 24px -4px rgba(184, 146, 90, 0.12), 0 4px 12px -2px rgba(34, 30, 26, 0.04)',
+        'xl': '0 20px 32px -6px rgba(184, 146, 90, 0.14), 0 8px 20px -4px rgba(34, 30, 26, 0.04)',
+        '2xl': '0 24px 48px -12px rgba(184, 146, 90, 0.16)',
         'inner': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.01)',
+        'cinematic': '0 8px 32px -4px rgba(184, 146, 90, 0.15), 0 4px 16px -2px rgba(255, 255, 255, 0.05)',
+        'tan-glow': '0 0 20px rgba(184, 146, 90, 0.3), 0 0 40px rgba(184, 146, 90, 0.15)',
       },
       keyframes: {
         "accordion-down": {
@@ -108,8 +110,8 @@ const config: Config = {
           "100%": { opacity: "1", transform: "translateX(0)" },
         },
         "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 20px rgba(210, 180, 140, 0.25)" },
-          "50%": { boxShadow: "0 0 40px rgba(210, 180, 140, 0.45)" },
+          "0%, 100%": { boxShadow: "0 0 20px rgba(184, 146, 90, 0.25)" },
+          "50%": { boxShadow: "0 0 40px rgba(184, 146, 90, 0.45)" },
         },
         "float": {
           "0%, 100%": { transform: "translateY(0px)" },

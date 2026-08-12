@@ -32,7 +32,7 @@ export default function VideoGallery() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-medium tracking-wide mb-6 text-foreground">
             Videos
           </h2>
-          <div className="w-12 h-[1px] bg-accent/80 mx-auto mb-6" />
+          <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mb-6" />
           <p className="text-sm text-muted-foreground leading-relaxed">
             Beautiful wedding films and highlight reels that tell your unique love story with cinematic color, composition, and emotional pace.
           </p>
@@ -64,7 +64,7 @@ export default function VideoGallery() {
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300 z-10" />
                 
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 transition-all duration-300">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:bg-accent group-hover:border-accent group-hover:scale-110 transition-all duration-300">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:bg-accent group-hover:border-accent group-hover:scale-110 transition-all duration-300 shadow-cinematic">
                     <Play className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white group-hover:text-accent-foreground ml-1" />
                   </div>
                 </div>
@@ -75,7 +75,7 @@ export default function VideoGallery() {
                 </div>
 
                 {/* Inner Border Accent */}
-                <div className="absolute inset-3 sm:inset-4 border border-white/10 pointer-events-none z-20" />
+                <div className="absolute inset-3 sm:inset-4 border border-accent/20 pointer-events-none z-20" />
               </div>
 
               {/* Title Block */}

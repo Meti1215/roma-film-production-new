@@ -33,7 +33,7 @@ export default function Services() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-medium tracking-wide mb-6 text-foreground">
             Services Offered
           </h2>
-          <div className="w-12 h-[1px] bg-accent/80 mx-auto mb-6" />
+          <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mb-6" />
           <p className="text-sm text-muted-foreground leading-relaxed">
             From intimate elopements to grand celebrations, we preserve your most cherished events with a signature cinematic style.
           </p>
@@ -51,7 +51,7 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.6, ease: 'easeOut', delay: (idx % 3) * 0.1 }}
-                className="group relative bg-card border border-border/60 hover:border-accent/40 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-sm"
+                className="group relative bg-card border border-border/60 hover:border-accent/50 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-cinematic hover:shadow-tan-glow"
               >
                 {/* Visual Header Image with dark overlay */}
                 <div className="relative h-44 w-full overflow-hidden bg-muted">
@@ -65,7 +65,7 @@ export default function Services() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20" />
                   
                   {/* Floating Icon overlay */}
-                  <div className="absolute top-4 right-4 w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20">
+                  <div className="absolute top-4 right-4 w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-accent/30">
                     <IconComponent className="w-5 h-5 text-accent" />
                   </div>
                 </div>

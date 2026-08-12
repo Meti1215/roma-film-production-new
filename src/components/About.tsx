@@ -19,7 +19,7 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="lg:col-span-6 relative h-[350px] sm:h-[450px] md:h-[550px] w-full bg-secondary overflow-hidden photo-hover-trigger shadow-sm"
+            className="lg:col-span-6 relative h-[350px] sm:h-[450px] md:h-[550px] w-full bg-secondary overflow-hidden photo-hover-trigger shadow-cinematic"
           >
             <Image
               src={brand.aboutPath}
@@ -29,7 +29,7 @@ export default function About() {
               sizes="(max-w-1024px) 100vw, 50vw"
             />
             {/* Soft border accent */}
-            <div className="absolute inset-4 border border-white/20 pointer-events-none" />
+            <div className="absolute inset-4 border border-accent/30 pointer-events-none" />
           </motion.div>
 
           {/* Text Side */}
@@ -51,7 +51,7 @@ export default function About() {
               "{brand.name} specializes in wedding photography and filmmaking, capturing real moments with a creative and timeless style. Our goal is simple—to create beautiful photos and films that preserve your memories for years to come."
             </p>
 
-            <div className="w-12 h-[1px] bg-accent/80 my-4" />
+            <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent my-4" />
 
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed tracking-wider mb-8 uppercase font-medium">
                Dallas, Texas & Worldwide Destinations

@@ -22,7 +22,7 @@ export default function Packages() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-medium tracking-wide mb-6 text-foreground">
             Packages
           </h2>
-          <div className="w-12 h-[1px] bg-accent/80 mx-auto mb-6" />
+          <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mb-6" />
           <p className="text-sm text-muted-foreground leading-relaxed">
             All our collections are crafted to provide exceptional coverage. Contact us to receive our detailed digital brochure with collections information.
           </p>
@@ -42,9 +42,9 @@ export default function Packages() {
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.6, ease: 'easeOut', delay: idx * 0.1 }}
                 className={`bg-card p-8 border flex flex-col justify-between items-stretch transition-all duration-300 relative ${
-                  pkg.highlighted 
-                    ? 'border-accent shadow-md scale-[1.02]' 
-                    : 'border-border/60 hover:border-accent/30'
+                  pkg.highlighted
+                    ? 'border-accent shadow-cinematic scale-[1.02]'
+                    : 'border-border/60 hover:border-accent/40 shadow-sm hover:shadow-cinematic'
                 }`}
               >
                 {/* Highlight Badge */}
@@ -63,7 +63,7 @@ export default function Packages() {
                     {pkg.subtitle}
                   </p>
                   
-                  <div className="w-8 h-[1px] bg-accent/60 mb-6" />
+                  <div className="w-8 h-[1px] bg-gradient-to-r from-transparent via-accent/60 to-transparent mb-6" />
 
                   {/* Bullet points */}
                   <ul className="space-y-3 mb-8">
@@ -95,7 +95,7 @@ export default function Packages() {
         </div>
 
         {/* Central Call to Action (WhatsApp + Contact) */}
-        <div className="flex flex-col items-center justify-center text-center max-w-xl mx-auto p-8 border border-accent/20 bg-background/50 backdrop-blur-sm">
+        <div className="flex flex-col items-center justify-center text-center max-w-xl mx-auto p-8 border border-accent/30 bg-background/50 backdrop-blur-sm shadow-cinematic">
           <h4 className="text-xl font-heading font-medium tracking-wide mb-3 text-foreground">
             Looking for something specific?
           </h4>

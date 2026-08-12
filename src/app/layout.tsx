@@ -6,13 +6,13 @@ import MobileMotionProvider from '@/components/MobileMotionProvider'
 import ScrollProgress from '@/components/ScrollProgress'
 import { brand } from '@/lib/brand'
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
 })
 
-const cormorant = Cormorant_Garamond({ 
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   style: ['normal', 'italic'],

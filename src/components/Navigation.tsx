@@ -50,9 +50,9 @@ export default function Navigation() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled 
-            ? 'glass-nav py-4 shadow-sm' 
-            : 'bg-black/50 backdrop-blur-sm py-6'
+          isScrolled
+            ? 'glass-nav py-4 shadow-cinematic'
+            : 'bg-gradient-to-b from-black/70 to-transparent backdrop-blur-sm py-6'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -72,15 +72,16 @@ export default function Navigation() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-xs uppercase tracking-wider font-medium hover:text-accent transition-colors duration-250 ${
-                    isActive(link.href) 
-                      ? 'text-accent border-b border-accent pb-1' 
-                      : isScrolled 
-                        ? 'text-foreground' 
+                  className={`text-xs uppercase tracking-wider font-medium hover:text-accent transition-colors duration-250 relative group ${
+                    isActive(link.href)
+                      ? 'text-accent'
+                      : isScrolled
+                        ? 'text-foreground'
                         : 'text-white'
                   }`}
                 >
                   {link.name}
+                  <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ${isActive(link.href) ? 'scale-x-100' : ''}`} />
                 </Link>
               ))}
             </nav>
@@ -89,10 +90,10 @@ export default function Navigation() {
             <div className="hidden md:block">
               <Link
                 href="/contact"
-                className={`px-5 py-2.5 text-xs uppercase tracking-widest font-semibold transition-all duration-300 border ${
+                className={`px-5 py-2.5 text-xs uppercase tracking-widest font-semibold transition-all duration-300 border shadow-cinematic ${
                   isScrolled
-                    ? 'bg-primary text-primary-foreground border-transparent hover:bg-accent hover:text-accent-foreground hover:border-accent'
-                    : 'bg-white text-black border-white hover:bg-accent hover:text-white'
+                    ? 'bg-accent text-accent-foreground border-accent hover:bg-accent/90 hover:shadow-tan-glow'
+                    : 'bg-accent text-accent-foreground border-accent hover:bg-accent/90 hover:shadow-tan-glow'
                 }`}
               >
                 Book a Session

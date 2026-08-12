@@ -4,64 +4,75 @@
 
 @layer base {
   :root {
-    --radius: 0rem; /* Elegant rectangular edges for premium feel */
+    --radius: 0rem;
+    /* Elegant rectangular edges for premium feel */
     --radius-soft: 0.125rem;
 
-    /* Light Theme (Warm, luxury wedding aesthetic: cream & gold) */
-    --background: #FCFBF9; /* Warm off-white / Alabaster */
-    --foreground: #1C1A17; /* Soft black / Charcoal */
+    /* Light Theme (Based on Roma Film Production logo colors) */
+    --background: #FAF8F5;
+    /* Warm off-white / Alabaster */
+    --foreground: #1A1814;
+    /* Soft black / Charcoal */
 
     --card: #FFFFFF;
-    --card-foreground: #1C1A17;
+    --card-foreground: #1A1814;
 
-    --popover: #FCFBF9;
-    --popover-foreground: #1C1A17;
+    --popover: #FAF8F5;
+    --popover-foreground: #1A1814;
 
-    --primary: #1C1A17; /* Bold Charcoal */
-    --primary-foreground: #FCFBF9;
+    --primary: #1A1814;
+    /* Bold Charcoal */
+    --primary-foreground: #FAF8F5;
 
-    --secondary: #F4F1EA; /* Creamy Beige */
-    --secondary-foreground: #1C1A17;
+    --secondary: #F3F0E8;
+    /* Creamy Beige */
+    --secondary-foreground: #1A1814;
 
-    --muted: #F4F1EA;
-    --muted-foreground: #7C7267; /* Warm Taupe */
+    --muted: #F3F0E8;
+    --muted-foreground: #8B8070;
+    /* Warm Taupe */
 
-    --accent: #C5A880; /* Soft Champagne Gold */
-    --accent-foreground: #1C1A17;
+    --accent: #B8925A;
+    /* Light Brown/Tan - from ROMA logo text */
+    --accent-foreground: #FAF8F5;
 
-    --border: #E8E4DA; /* Subtle Cream Border */
-    --input: #E8E4DA;
-    --ring: #C5A880;
+    --border: #E5E0D5;
+    /* Subtle Cream Border */
+    --input: #E5E0D5;
+    --ring: #B8925A;
 
     --navbar-height: 80px;
   }
 
   .dark {
-    /* Dark Theme (Cinematic, luxury mood: charcoal & champagne) */
-    --background: #0E0D0C; /* Deep Obsidian Black */
-    --foreground: #F5F2EC; /* Warm Ivory */
+    /* Dark Theme (Cinematic, luxury mood - based on logo black background) */
+    --background: #0A0908;
+    /* Deep Black - from logo background */
+    --foreground: #FFFFFF;
+    /* White - from FILM PRODUCTION logo text */
 
-    --card: #151412;
-    --card-foreground: #F5F2EC;
+    --card: #12100E;
+    --card-foreground: #FFFFFF;
 
-    --popover: #0E0D0C;
-    --popover-foreground: #F5F2EC;
+    --popover: #0A0908;
+    --popover-foreground: #FFFFFF;
 
-    --primary: #F5F2EC;
-    --primary-foreground: #0E0D0C;
+    --primary: #FFFFFF;
+    --primary-foreground: #0A0908;
 
-    --secondary: #1C1A17;
-    --secondary-foreground: #F5F2EC;
+    --secondary: #1A1814;
+    --secondary-foreground: #FFFFFF;
 
-    --muted: #1C1A17;
+    --muted: #1A1814;
     --muted-foreground: #A19688;
 
-    --accent: #D4BD9E; /* Bright Champagne Gold */
-    --accent-foreground: #0E0D0C;
+    --accent: #C9A066;
+    /* Enhanced Light Brown/Tan for dark mode */
+    --accent-foreground: #0A0908;
 
-    --border: #282521;
-    --input: #282521;
-    --ring: #D4BD9E;
+    --border: #25231E;
+    --input: #25231E;
+    --ring: #C9A066;
   }
 
   * {
@@ -80,7 +91,12 @@
   }
 
   /* Elegant Headings */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading tracking-wide text-foreground leading-snug;
   }
 }
@@ -91,15 +107,15 @@
   }
 
   .glass-nav {
-    background: rgba(252, 251, 249, 0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(232, 228, 218, 0.5);
+    background: rgba(250, 248, 245, 0.90);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(184, 146, 90, 0.15);
   }
 
   .dark .glass-nav {
-    background: rgba(14, 13, 12, 0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(40, 37, 33, 0.5);
+    background: rgba(10, 9, 8, 0.90);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(201, 160, 102, 0.2);
   }
 
   .text-shadow-sm {
@@ -108,6 +124,10 @@
 
   .text-shadow-md {
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6), 0 4px 6px rgba(0, 0, 0, 0.3);
   }
 
   .scrollbar-none {
@@ -138,6 +158,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

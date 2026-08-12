@@ -144,6 +144,25 @@ export const brand = {
     },
   ],
 
+  // Home Page Photos (featured on home page only)
+  homePagePhotos: [
+    {
+      src: "/images/photos/photo2.jpg",
+      alt: "Couple portrait",
+      category: "Couples",
+    },
+    {
+      src: "/images/photos/photo8.jpg",
+      alt: "Family moment",
+      category: "Family",
+    },
+    {
+      src: "/images/photos/photo7.jpg",
+      alt: "Wedding celebration",
+      category: "Events",
+    },
+  ],
+
   // Video Gallery
   videos: [
 
