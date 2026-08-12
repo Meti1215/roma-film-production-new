@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0rem; /* Elegant rectangular edges for premium feel */
+    --radius-soft: 0.125rem;
+
+    /* Light Theme (Warm, luxury wedding aesthetic: cream & gold) */
+    --background: #FCFBF9; /* Warm off-white / Alabaster */
+    --foreground: #1C1A17; /* Soft black / Charcoal */
+
+    --card: #FFFFFF;
+    --card-foreground: #1C1A17;
+
+    --popover: #FCFBF9;
+    --popover-foreground: #1C1A17;
+
+    --primary: #1C1A17; /* Bold Charcoal */
+    --primary-foreground: #FCFBF9;
+
+    --secondary: #F4F1EA; /* Creamy Beige */
+    --secondary-foreground: #1C1A17;
+
+    --muted: #F4F1EA;
+    --muted-foreground: #7C7267; /* Warm Taupe */
+
+    --accent: #C5A880; /* Soft Champagne Gold */
+    --accent-foreground: #1C1A17;
+
+    --border: #E8E4DA; /* Subtle Cream Border */
+    --input: #E8E4DA;
+    --ring: #C5A880;
+
+    --navbar-height: 80px;
+  }
+
+  .dark {
+    /* Dark Theme (Cinematic, luxury mood: charcoal & champagne) */
+    --background: #0E0D0C; /* Deep Obsidian Black */
+    --foreground: #F5F2EC; /* Warm Ivory */
+
+    --card: #151412;
+    --card-foreground: #F5F2EC;
+
+    --popover: #0E0D0C;
+    --popover-foreground: #F5F2EC;
+
+    --primary: #F5F2EC;
+    --primary-foreground: #0E0D0C;
+
+    --secondary: #1C1A17;
+    --secondary-foreground: #F5F2EC;
+
+    --muted: #1C1A17;
+    --muted-foreground: #A19688;
+
+    --accent: #D4BD9E; /* Bright Champagne Gold */
+    --accent-foreground: #0E0D0C;
+
+    --border: #282521;
+    --input: #282521;
+    --ring: #D4BD9E;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-accent selection:text-accent-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    letter-spacing: 0.02em;
+  }
+
+  /* Elegant Headings */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-wide text-foreground leading-snug;
+  }
+}
+
+@layer utilities {
+  .pt-navbar {
+    padding-top: var(--navbar-height);
+  }
+
+  .glass-nav {
+    background: rgba(252, 251, 249, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(232, 228, 218, 0.5);
+  }
+
+  .dark .glass-nav {
+    background: rgba(14, 13, 12, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(40, 37, 33, 0.5);
+  }
+
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .text-shadow-md {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Custom premium hover and reveal transition animations */
+.photo-hover-trigger img {
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.photo-hover-trigger:hover img {
+  transform: scale(1.05);
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
