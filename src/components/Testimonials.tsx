@@ -7,11 +7,11 @@ import { Quote } from 'lucide-react'
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-background overflow-hidden">
+    <section id="testimonials" className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-background overflow-hidden">
       <div className="max-w-7xl mx-auto">
 
         {/* Title */}
-        <div className="text-center max-w-2xl mx-auto mb-16 md:mb-24">
+        <div className="text-center max-w-2xl mx-auto mb-8 md:mb-12">
           <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-accent mb-3 block">
             Love Letters
           </span>

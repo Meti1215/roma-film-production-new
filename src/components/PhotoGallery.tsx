@@ -96,7 +96,7 @@ export default function PhotoGallery({ photos = brand.photos }: PhotoGalleryProp
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
                 onClick={() => openLightbox(photo.src)}
-                className={`group relative cursor-pointer overflow-hidden bg-muted photo-hover-trigger ${isHomePage ? 'aspect-[4/5] md:aspect-square' : 'aspect-[3/4] md:aspect-[4/5]'}`}
+                className={`group relative cursor-pointer overflow-hidden bg-black photo-hover-trigger ${isHomePage ? 'aspect-[3/4] md:aspect-[4/5]' : 'aspect-[2/3] md:aspect-[3/4]'}`}
               >
                 <Image
                   src={photo.src}

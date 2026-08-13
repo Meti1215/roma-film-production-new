@@ -11,11 +11,11 @@ export default function Packages() {
   const whatsAppUrl = `https://wa.me/${cleanWhatsAppNumber}?text=Hi!%20I'm%20interested%20in%20your%20packages%20for%20Roma%20Film%20Production.%20Could%20you%20please%20share%20the%20details?`
 
   return (
-    <section id="packages" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-secondary/30">
+    <section id="packages" className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-secondary/30">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Title */}
-        <div className="text-center max-w-2xl mx-auto mb-16 md:mb-24">
+        <div className="text-center max-w-2xl mx-auto mb-8 md:mb-12">
           <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-accent mb-3 block">
             Collections & Investment
           </span>

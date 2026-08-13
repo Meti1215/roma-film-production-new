@@ -93,7 +93,7 @@ export const brand = {
       category: "Weddings",
     },
     {
-      src: "/images/photos/photo2.jpg",
+      src: "/images/photos/photo8.jpg",
       alt: "Couple portrait",
       category: "Couples",
     },
@@ -108,7 +108,7 @@ export const brand = {
       category: "Bride & Groom",
     },
     {
-      src: "/images/photos/photo5.jpg",
+      src: "/images/photos/photo9.jpg",
       alt: "Romantic couple",
       category: "Couples",
     },
@@ -123,17 +123,17 @@ export const brand = {
       category: "Events",
     },
     {
-      src: "/images/photos/photo8.jpg",
+      src: "/images/photos/photo5.jpg",
       alt: "Family moment",
       category: "Family",
     },
     {
-      src: "/images/photos/photo9.jpg",
+      src: "/images/photos/photo10.jpg",
       alt: "Portrait session",
       category: "Portraits",
     },
     {
-      src: "/images/photos/photo10.jpg",
+      src: "/images/photos/photo2.jpg",
       alt: "Wedding photography",
       category: "Weddings",
     },
@@ -147,14 +147,14 @@ export const brand = {
   // Home Page Photos (featured on home page only)
   homePagePhotos: [
     {
-      src: "/images/photos/photo2.jpg",
+      src: "/images/photos/photo8.jpg",
       alt: "Couple portrait",
       category: "Couples",
     },
     {
-      src: "/images/photos/photo8.jpg",
-      alt: "Family moment",
-      category: "Family",
+      src: "/images/photos/photo9.jpg",
+      alt: "Wedding ceremony",
+      category: "Weddings",
     },
     {
       src: "/images/photos/photo7.jpg",
@@ -171,7 +171,7 @@ export const brand = {
       subtitle: "Instagram Highlight",
       category: "Highlight Film",
       duration: "Short",
-      thumbnail: "/images/photos/photo2.jpg",
+      thumbnail: "/images/photos/photo8.jpg",
       videoUrl: "/videos/BINYAM & ELSHADAY INSTAGRAM.mp4",
     },
 
@@ -180,7 +180,7 @@ export const brand = {
       subtitle: "Short Film",
       category: "Highlight Film",
       duration: "Short",
-      thumbnail: "/images/photos/photo3.jpg",
+      thumbnail: "/images/photos/photo9.jpg",
       videoUrl: "/videos/Nahom SHORT.mp4",
     },
   ],

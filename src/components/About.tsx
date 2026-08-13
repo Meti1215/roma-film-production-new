@@ -19,15 +19,17 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="lg:col-span-6 relative h-[350px] sm:h-[450px] md:h-[550px] w-full bg-secondary overflow-hidden photo-hover-trigger shadow-cinematic"
+            className="lg:col-span-6 relative w-full bg-secondary overflow-hidden photo-hover-trigger shadow-cinematic"
           >
-            <Image
-              src={brand.aboutPath}
-              alt={`Intimate wedding moment captured by ${brand.name}`}
-              fill
-              className="object-cover object-center"
-              sizes="(max-w-1024px) 100vw, 50vw"
-            />
+            <div className="relative w-full aspect-[3/4] max-h-[500px]">
+              <Image
+                src={brand.aboutPath}
+                alt={`Intimate wedding moment captured by ${brand.name}`}
+                fill
+                className="object-contain object-center"
+                sizes="(max-w-1024px) 100vw, 50vw"
+              />
+            </div>
             {/* Soft border accent */}
             <div className="absolute inset-4 border border-accent/30 pointer-events-none" />
           </motion.div>

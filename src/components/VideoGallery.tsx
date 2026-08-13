@@ -21,11 +21,11 @@ export default function VideoGallery() {
   }
 
   return (
-    <section id="videos" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-secondary/30">
+    <section id="videos" className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-secondary/30">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16 md:mb-24">
+        <div className="text-center max-w-2xl mx-auto mb-8 md:mb-12">
           <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-accent mb-3 block">
             Moving Frames
           </span>
@@ -51,26 +51,26 @@ export default function VideoGallery() {
               onClick={() => openVideoPlayer(video.videoUrl, video.title)}
             >
               {/* Thumbnail Container */}
-              <div className="relative h-56 sm:h-64 md:h-80 lg:h-[400px] w-full overflow-hidden bg-black photo-hover-trigger">
+              <div className="relative w-full aspect-[16/9] max-h-[250px] overflow-hidden bg-black photo-hover-trigger">
                 <Image
                   src={video.thumbnail}
                   alt={`${video.title} Video Thumbnail`}
                   fill
-                  className="object-cover object-center opacity-90 transition-transform duration-700"
+                  className="object-contain object-center opacity-90 transition-transform duration-700"
                   sizes="(max-w-640px) 100vw, (max-w-1024px) 50vw, 50vw"
                 />
-                
+
                 {/* Cinematic Dark Overlay and Play Button */}
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300 z-10" />
-                
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 transition-all duration-300">
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300 z-10 pointer-events-none" />
+
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 transition-all duration-300 pointer-events-none">
                   <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:bg-accent group-hover:border-accent group-hover:scale-110 transition-all duration-300 shadow-cinematic">
                     <Play className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white group-hover:text-accent-foreground ml-1" />
                   </div>
                 </div>
 
                 {/* Duration Badge */}
-                <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 px-2 py-1 sm:px-2.5 sm:py-1 bg-black/60 backdrop-blur-sm text-[9px] sm:text-[10px] font-semibold text-white/90 uppercase tracking-widest">
+                <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 px-2 py-1 sm:px-2.5 sm:py-1 bg-black/60 backdrop-blur-sm text-[9px] sm:text-[10px] font-semibold text-white/90 uppercase tracking-widest pointer-events-none">
                   {video.duration}
                 </div>
 

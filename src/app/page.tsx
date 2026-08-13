@@ -19,7 +19,7 @@ export default function Home() {
       <Navigation />
       <Hero />
       <About />
-      <Services />
+      <Services showImages={false} />
       <PhotoGallery photos={brand.homePagePhotos} />
       <VideoGallery />
       <Testimonials />

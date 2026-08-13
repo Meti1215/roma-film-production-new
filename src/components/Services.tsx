@@ -20,11 +20,15 @@ const serviceIcons: Record<string, any> = {
   'event-highlights': ImageIcon,
 }
 
-export default function Services() {
+interface ServicesProps {
+  showImages?: boolean
+}
+
+export default function Services({ showImages = true }: ServicesProps) {
   return (
     <section id="services" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-secondary/30">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Title */}
         <div className="text-center max-w-2xl mx-auto mb-16 md:mb-24">
           <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-accent mb-3 block">
@@ -51,32 +55,44 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.6, ease: 'easeOut', delay: (idx % 3) * 0.1 }}
-                className="group relative bg-card border border-border/60 hover:border-accent/50 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-cinematic hover:shadow-tan-glow"
+                className={`group relative bg-card border border-border/60 hover:border-accent/50 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-cinematic hover:shadow-tan-glow ${!showImages ? 'min-h-[400px]' : ''}`}
               >
-                {/* Visual Header Image with dark overlay */}
-                <div className="relative h-44 w-full overflow-hidden bg-muted">
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-w-768px) 100vw, (max-w-1024px) 50vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20" />
-                  
-                  {/* Floating Icon overlay */}
-                  <div className="absolute top-4 right-4 w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-accent/30">
-                    <IconComponent className="w-5 h-5 text-accent" />
+                {showImages ? (
+                  /* Visual Header Image with dark overlay */
+                  <div className="relative h-48 w-full overflow-hidden bg-muted">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      className="object-contain transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-w-768px) 100vw, (max-w-1024px) 50vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20" />
+
+                    {/* Floating Icon overlay */}
+                    <div className="absolute top-3 right-3 w-8 h-8 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-accent/30">
+                      <IconComponent className="w-4 h-4 text-accent" />
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  /* Elegant icon-only header without image */
+                  <div className="relative h-20 w-full bg-gradient-to-br from-accent/5 via-secondary/10 to-accent/5 flex items-center justify-center border-b border-border/30">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-accent/20 blur-xl rounded-full opacity-30" />
+                      <div className="relative w-12 h-12 bg-gradient-to-br from-accent/10 to-accent/5 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-accent/20 shadow-sm">
+                        <IconComponent className="w-6 h-6 text-accent" />
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Body Text */}
-                <div className="p-6 md:p-8 flex-grow flex flex-col justify-between">
+                <div className="p-5 md:p-6 flex-grow flex flex-col justify-between">
                   <div>
-                    <h3 className="text-lg md:text-xl font-heading font-medium tracking-wide mb-3 text-foreground group-hover:text-accent transition-colors">
+                    <h3 className="text-base md:text-lg font-heading font-medium tracking-wide mb-2 text-foreground group-hover:text-accent transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-xs md:text-sm text-muted-foreground leading-relaxed mb-6 font-light">
+                    <p className="text-xs md:text-sm text-muted-foreground leading-relaxed mb-4 font-light">
                       {service.description}
                     </p>
                   </div>
