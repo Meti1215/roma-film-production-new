@@ -107,14 +107,12 @@
   }
 
   .glass-nav {
-    background: rgba(250, 248, 245, 0.90);
-    backdrop-filter: blur(16px);
+    background: rgba(250, 248, 245, 0.95);
     border-bottom: 1px solid rgba(184, 146, 90, 0.15);
   }
 
   .dark .glass-nav {
-    background: rgba(10, 9, 8, 0.90);
-    backdrop-filter: blur(16px);
+    background: rgba(10, 9, 8, 0.95);
     border-bottom: 1px solid rgba(201, 160, 102, 0.2);
   }
 

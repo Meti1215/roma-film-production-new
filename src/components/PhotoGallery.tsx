@@ -84,7 +84,7 @@ export default function PhotoGallery({ photos = brand.photos }: PhotoGalleryProp
         {/* Photos Grid */}
         <motion.div
           layout
-          className={`grid gap-2 md:gap-4 ${isHomePage ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-2 md:grid-cols-3'}`}
+          className="grid gap-2 grid-cols-2 lg:grid-cols-4"
         >
           <AnimatePresence mode="popLayout">
             {filteredPhotos.map((photo, index) => (
@@ -96,19 +96,20 @@ export default function PhotoGallery({ photos = brand.photos }: PhotoGalleryProp
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
                 onClick={() => openLightbox(photo.src)}
-                className={`group relative cursor-pointer overflow-hidden bg-black photo-hover-trigger ${isHomePage ? 'aspect-[3/4] md:aspect-[4/5]' : 'aspect-[2/3] md:aspect-[3/4]'}`}
+                className="group relative cursor-pointer photo-hover-trigger bg-transparent aspect-[3/4] overflow-hidden"
               >
                 <Image
                   src={photo.src}
                   alt={photo.alt}
                   fill
-                  className="object-cover object-center"
-                  sizes="(max-w-640px) 50vw, (max-w-1024px) 33vw, 25vw"
+                  className="object-contain"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 25vw"
+                  quality={85}
                 />
 
                 {/* Overlay on hover - only show for full gallery, not home page */}
                 {!isHomePage && (
-                  <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
+                  <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10 pointer-events-none">
                     <div className="text-center p-4">
                       <Maximize2 className="w-6 h-6 text-white mx-auto mb-2 opacity-80 group-hover:scale-110 transition-transform" />
                       <span className="text-[10px] tracking-widest uppercase text-white/90 font-medium block">
