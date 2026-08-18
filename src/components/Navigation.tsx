@@ -39,6 +39,24 @@ export default function Navigation() {
     setIsOpen(false)
   }, [pathname])
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+      document.body.style.position = 'fixed'
+      document.body.style.width = '100%'
+    } else {
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.width = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.width = ''
+    }
+  }, [isOpen])
+
   const isActive = (href: string) => {
     if (href === '/') {
       return pathname === '/'
@@ -121,20 +139,39 @@ export default function Navigation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-background/98 md:hidden flex flex-col justify-between pt-24 pb-8 px-6"
+            className="fixed inset-0 z-[60] bg-background md:hidden flex flex-col min-h-[100dvh]"
           >
+            {/* Header with Logo and Close Button */}
+            <div className="flex items-center justify-between px-6 py-6 border-b border-border">
+              <Link href="/" onClick={() => setIsOpen(false)}>
+                <img 
+                  src={brand.logoPath} 
+                  alt={brand.name}
+                  className="h-12 w-auto"
+                />
+              </Link>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="text-foreground focus:outline-none p-2"
+                aria-label="Close navigation menu"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
             {/* Drawer Navigation Links */}
-            <nav className="flex flex-col space-y-6 items-center justify-center flex-grow">
+            <nav className="flex flex-col items-center justify-center flex-grow py-8">
               {navLinks.map((link, idx) => (
                 <motion.div
                   key={link.name}
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.05 }}
+                  className="w-full"
                 >
                   <Link
                     href={link.href}
-                    className={`text-lg uppercase tracking-widest font-semibold hover:text-accent transition-colors ${
+                    className={`block text-center text-xl uppercase tracking-widest font-semibold hover:text-accent transition-colors py-4 ${
                       isActive(link.href) ? 'text-accent' : 'text-foreground'
                     }`}
                   >
@@ -147,7 +184,7 @@ export default function Navigation() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: navLinks.length * 0.05 }}
-                className="pt-4"
+                className="pt-6"
               >
                 <Link
                   href="/contact"
@@ -159,18 +196,13 @@ export default function Navigation() {
             </nav>
 
             {/* Mobile Drawer Footer Contacts */}
-            <div className="border-t border-border pt-6 flex flex-col items-center space-y-2 text-center text-xs text-muted-foreground">
-              <img 
-                src={brand.logoPath} 
-                alt={brand.name}
-                className="h-8 w-auto mb-2"
-              />
-              <a href={brand.phoneHref} className="flex items-center gap-1.5 hover:text-accent">
-                <Phone className="w-3.5 h-3.5" />
+            <div className="border-t border-border pt-6 pb-8 px-6 flex flex-col items-center space-y-3 text-center text-sm text-muted-foreground">
+              <a href={brand.phoneHref} className="flex items-center gap-2 hover:text-accent">
+                <Phone className="w-4 h-4" />
                 {brand.phone}
               </a>
-              <a href={brand.emailHref} className="flex items-center gap-1.5 hover:text-accent">
-                <Mail className="w-3.5 h-3.5" />
+              <a href={brand.emailHref} className="flex items-center gap-2 hover:text-accent">
+                <Mail className="w-4 h-4" />
                 {brand.email}
               </a>
             </div>

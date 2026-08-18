@@ -25,7 +25,7 @@ export const brand = {
   // Media Registry
   logoPath: "/images/logo/logo.png",
   heroPath: "/images/hero/hero_bg.jpg",
-  aboutPath: "/images/photos/about_couple.jpg",
+  aboutPath: "/images/photos/photo9.jpg",
 
   // Services offered
   services: [
@@ -90,76 +90,221 @@ export const brand = {
     {
       src: "/images/photos/photo1.jpg",
       alt: "Wedding photography moment",
-      category: "Weddings",
-    },
-    {
-      src: "/images/photos/photo8.jpg",
-      alt: "Couple portrait",
-      category: "Couples",
-    },
-    {
-      src: "/images/photos/photo3.jpg",
-      alt: "Wedding ceremony moment",
-      category: "Weddings",
-    },
-    {
-      src: "/images/photos/photo4.jpg",
-      alt: "Bride and groom",
-      category: "Bride & Groom",
-    },
-    {
-      src: "/images/photos/photo9.jpg",
-      alt: "Romantic couple",
-      category: "Couples",
-    },
-    {
-      src: "/images/photos/photo6.jpg",
-      alt: "Wedding details",
-      category: "Weddings",
-    },
-    {
-      src: "/images/photos/photo7.jpg",
-      alt: "Wedding celebration",
-      category: "Events",
-    },
-    {
-      src: "/images/photos/photo5.jpg",
-      alt: "Family moment",
-      category: "Family",
-    },
-    {
-      src: "/images/photos/photo10.jpg",
-      alt: "Portrait session",
-      category: "Portraits",
+      categories: ["Weddings"],
     },
     {
       src: "/images/photos/photo2.jpg",
       alt: "Wedding photography",
-      category: "Weddings",
+      categories: ["Weddings"],
+    },
+    {
+      src: "/images/photos/photo3.jpg",
+      alt: "Wedding ceremony moment",
+      categories: ["Weddings"],
+    },
+    {
+      src: "/images/photos/photo4.jpg",
+      alt: "Bride and groom",
+      categories: ["Weddings"],
+    },
+    {
+      src: "/images/photos/photo5.jpg",
+      alt: "Family moment",
+      categories: ["Weddings"],
+    },
+    {
+      src: "/images/photos/photo6.jpg",
+      alt: "Wedding details",
+      categories: ["Weddings"],
+    },
+    {
+      src: "/images/photos/photo7.jpg",
+      alt: "Wedding celebration",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo8.jpg",
+      alt: "Couple portrait",
+      categories: ["Bride & Groom", "Weddings"],
+    },
+    {
+      src: "/images/photos/photo9.jpg",
+      alt: "Romantic couple",
+      categories: ["Bride & Groom", "Weddings"],
+    },
+    {
+      src: "/images/photos/photo10.jpg",
+      alt: "Portrait session",
+      categories: ["Bride & Groom", "Weddings"],
     },
     {
       src: "/images/photos/photo11.jpg",
       alt: "Special moment",
-      category: "Couples",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo12.jpg",
+      alt: "Wedding moment",
+      categories: ["Weddings"],
+    },
+    {
+      src: "/images/photos/photo13.jpg",
+      alt: "Portrait",
+      categories: ["Engagement"],
+    },
+    {
+      src: "/images/photos/photo14.jpg",
+      alt: "Couple",
+      categories: ["Engagement"],
+    },
+    {
+      src: "/images/photos/photo15.jpg",
+      alt: "Wedding detail",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo16.jpg",
+      alt: "Event moment",
+      categories: ["Weddings"],
+    },
+    {
+      src: "/images/photos/photo17.jpg",
+      alt: "Family portrait",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo18.jpg",
+      alt: "Wedding ceremony",
+      categories: ["Engagement"],
+    },
+    {
+      src: "/images/photos/photo19.jpg",
+      alt: "Bride",
+      categories: ["Weddings"],
+    },
+    {
+      src: "/images/photos/photo20.jpg",
+      alt: "Groom",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo21.jpg",
+      alt: "Wedding celebration",
+      categories: ["Weddings"],
+    },
+    {
+      src: "/images/photos/photo22.jpg",
+      alt: "Couple moment",
+      categories: ["Weddings"],
+    },
+    {
+      src: "/images/photos/photo23.jpg",
+      alt: "Family event",
+      categories: ["Events"],
+    },
+    {
+      src: "/images/photos/photo24.jpg",
+      alt: "Event coverage",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo25.jpg",
+      alt: "Portrait session",
+      categories: ["Events"],
+    },
+    {
+      src: "/images/photos/photo26.jpg",
+      alt: "Wedding day",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo27.jpg",
+      alt: "Couple portrait",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo28.jpg",
+      alt: "Family gathering",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo29.jpg",
+      alt: "Event moment",
+      categories: ["Events"],
+    },
+    {
+      src: "/images/photos/photo30.jpg",
+      alt: "Portrait",
+      categories: ["Events"],
+    },
+    {
+      src: "/images/photos/photo31.jpg",
+      alt: "Wedding detail",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo32.jpg",
+      alt: "Bride and groom",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo33.jpg",
+      alt: "Couple",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo34.jpg",
+      alt: "Family moment",
+      categories: ["Events"],
+    },
+    {
+      src: "/images/photos/photo35.jpg",
+      alt: "Event",
+      categories: ["Events"],
+    },
+    {
+      src: "/images/photos/photo36.jpg",
+      alt: "Portrait",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo37.jpg",
+      alt: "Wedding",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo38.jpg",
+      alt: "Couple moment",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo39.jpg",
+      alt: "Family",
+      categories: ["Events"],
     },
   ],
 
   // Home Page Photos (featured on home page only)
   homePagePhotos: [
     {
-      src: "/images/photos/photo8.jpg",
-      alt: "Couple portrait",
-      category: "Couples",
-    },
-    {
-      src: "/images/photos/photo9.jpg",
-      alt: "Wedding ceremony",
-      category: "Weddings",
+      src: "/images/photos/photo1.jpg",
+      alt: "Wedding photography moment",
+      categories: ["Weddings"],
     },
     {
       src: "/images/photos/photo7.jpg",
       alt: "Wedding celebration",
-      category: "Events",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo17.jpg",
+      alt: "Family portrait",
+      categories: ["Family"],
+    },
+    {
+      src: "/images/photos/photo26.jpg",
+      alt: "Wedding day",
+      categories: ["Family"],
     },
   ],
 
@@ -171,7 +316,7 @@ export const brand = {
       subtitle: "Instagram Highlight",
       category: "Highlight Film",
       duration: "Short",
-      thumbnail: "/images/photos/photo8.jpg",
+      thumbnail: "/images/photos/photo40.jpg",
       videoUrl: "/videos/BINYAM & ELSHADAY INSTAGRAM.mp4",
     },
 
@@ -180,7 +325,7 @@ export const brand = {
       subtitle: "Short Film",
       category: "Highlight Film",
       duration: "Short",
-      thumbnail: "/images/photos/photo9.jpg",
+      thumbnail: "/images/photos/photo40.jpg",
       videoUrl: "/videos/Nahom SHORT.mp4",
     },
   ],

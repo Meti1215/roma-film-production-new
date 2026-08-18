@@ -1,14 +1,130 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { brand } from '@/lib/brand'
 import { Play, X } from 'lucide-react'
 
-export default function VideoGallery() {
+interface Video {
+  id: string;
+  title: string;
+  category: string;
+  video_url: string;
+  thumbnail_url: string | null;
+}
+
+interface LegacyVideo {
+  title: string;
+  subtitle: string;
+  category: string;
+  duration: string;
+  thumbnail: string;
+  videoUrl: string;
+}
+
+interface VideoGalleryProps {
+  fetchFromSupabase?: boolean
+}
+
+export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryProps) {
+  const [videos, setVideos] = useState<LegacyVideo[]>([]);
+  const [loading, setLoading] = useState(fetchFromSupabase);
   const [activeVideoUrl, setActiveVideoUrl] = useState<string | null>(null)
   const [activeVideoTitle, setActiveVideoTitle] = useState<string>('')
+
+  // Helper functions - defined before useEffect
+  function getYouTubeVideoId(url: string): string | null {
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
+      /youtube\.com\/watch\?.*v=([^&\n?#]+)/
+    ];
+
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match && match[1]) {
+        return match[1];
+      }
+    }
+
+    return null;
+  }
+
+  function isYouTubeUrl(url: string): boolean {
+    return getYouTubeVideoId(url) !== null;
+  }
+
+  function getYouTubeEmbedUrl(url: string): string {
+    const videoId = getYouTubeVideoId(url);
+    if (videoId) {
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+    return url;
+  }
+
+  function isDirectVideoUrl(url: string): boolean {
+    const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.avi', '.mkv'];
+    return videoExtensions.some(ext => url.toLowerCase().endsWith(ext));
+  }
+
+  function getYouTubeThumbnailUrl(url: string): string | null {
+    const videoId = getYouTubeVideoId(url);
+    if (videoId) {
+      return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    }
+    return null;
+  }
+
+  useEffect(() => {
+    if (!fetchFromSupabase) {
+      setVideos(brand.videos);
+      setLoading(false);
+      return;
+    }
+
+    async function fetchVideos() {
+      try {
+        const response = await fetch('/api/videos');
+        const data = await response.json();
+        
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        
+        // Map Supabase videos to legacy format
+        const mappedVideos = (data.videos || []).map((video: Video) => {
+          // Use custom thumbnail if provided, otherwise use YouTube thumbnail for YouTube videos, or fallback
+          let thumbnail = video.thumbnail_url;
+          if (!thumbnail && isYouTubeUrl(video.video_url)) {
+            thumbnail = getYouTubeThumbnailUrl(video.video_url);
+          }
+          if (!thumbnail) {
+            thumbnail = "/images/photos/photo8.jpg";
+          }
+
+          return {
+            title: video.title,
+            subtitle: video.category,
+            category: video.category,
+            duration: "Short", // Default duration since it's not in Supabase
+            thumbnail: thumbnail,
+            videoUrl: video.video_url,
+          };
+        });
+        
+        // Combine with existing brand videos
+        setVideos([...mappedVideos, ...brand.videos]);
+      } catch (err) {
+        console.error('Failed to fetch videos:', err);
+        // Fallback to brand videos if Supabase fails
+        setVideos(brand.videos);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchVideos();
+  }, [fetchFromSupabase]);
 
   const openVideoPlayer = (url: string, title: string) => {
     setActiveVideoUrl(url)
@@ -18,6 +134,30 @@ export default function VideoGallery() {
   const closeVideoPlayer = () => {
     setActiveVideoUrl(null)
     setActiveVideoTitle('')
+  }
+
+  if (loading) {
+    return (
+      <section id="videos" className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-secondary/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-8 md:mb-12">
+            <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-accent mb-3 block">
+              Moving Frames
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-medium tracking-wide mb-6 text-foreground">
+              Videos
+            </h2>
+            <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mb-6" />
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Beautiful wedding films and highlight reels that tell your unique love story with cinematic color, composition, and emotional pace.
+            </p>
+          </div>
+          <div className="text-center text-muted-foreground">
+            Loading videos...
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (
@@ -40,9 +180,9 @@ export default function VideoGallery() {
 
         {/* Video Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
-          {brand.videos.map((video, idx) => (
+          {videos.map((video, idx) => (
             <motion.div
-              key={video.title}
+              key={`${video.title}-${idx}`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
@@ -52,13 +192,21 @@ export default function VideoGallery() {
             >
               {/* Thumbnail Container */}
               <div className="relative w-full aspect-[16/9] max-h-[250px] overflow-hidden bg-black photo-hover-trigger">
-                <Image
-                  src={video.thumbnail}
-                  alt={`${video.title} Video Thumbnail`}
-                  fill
-                  className="object-contain object-center opacity-90 transition-transform duration-700"
-                  sizes="(max-w-640px) 100vw, (max-w-1024px) 50vw, 50vw"
-                />
+                {video.thumbnail.startsWith('http') ? (
+                  <img
+                    src={video.thumbnail}
+                    alt={`${video.title} Video Thumbnail`}
+                    className="w-full h-full object-contain opacity-90 transition-transform duration-700"
+                  />
+                ) : (
+                  <Image
+                    src={video.thumbnail}
+                    alt={`${video.title} Video Thumbnail`}
+                    fill
+                    className="object-contain object-center opacity-90 transition-transform duration-700"
+                    sizes="(max-w-640px) 100vw, (max-w-1024px) 50vw, 50vw"
+                  />
+                )}
 
                 {/* Cinematic Dark Overlay and Play Button */}
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300 z-10 pointer-events-none" />
@@ -126,13 +274,23 @@ export default function VideoGallery() {
                 transition={{ duration: 0.3 }}
                 className="w-full aspect-video bg-black shadow-2xl relative rounded-lg overflow-hidden"
               >
-                <video
-                  src={activeVideoUrl}
-                  controls
-                  autoPlay
-                  preload="metadata"
-                  className="w-full h-full object-contain"
-                />
+                {isYouTubeUrl(activeVideoUrl) ? (
+                  <iframe
+                    src={getYouTubeEmbedUrl(activeVideoUrl)}
+                    title={activeVideoTitle}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    className="w-full h-full"
+                  />
+                ) : (
+                  <video
+                    src={activeVideoUrl}
+                    controls
+                    autoPlay
+                    preload="metadata"
+                    className="w-full h-full object-contain"
+                  />
+                )}
               </motion.div>
               <h4 className="mt-3 sm:mt-4 text-white font-heading text-base sm:text-lg md:text-xl tracking-wide text-center px-4">
                 {activeVideoTitle}

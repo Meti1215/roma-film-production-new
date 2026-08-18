@@ -14,13 +14,13 @@ export default function PhotoGallery({ photos = brand.photos }: PhotoGalleryProp
   const [activeCategory, setActiveCategory] = useState('All')
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
-  const categories = ['All', 'Weddings', 'Couples', 'Bride & Groom', 'Engagement', 'Portraits', 'Family', 'Events']
-  const showFilters = photos === brand.photos
+  const categories = ['All', 'Weddings', 'Bride & Groom', 'Engagement', 'Family', 'Events']
   const isHomePage = photos === brand.homePagePhotos
+  const showFilters = !isHomePage
 
   // Filter photos - only filter if showing all photos and filters are enabled
   const filteredPhotos = showFilters && activeCategory !== 'All'
-    ? photos.filter(p => p.category === activeCategory)
+    ? photos.filter(p => p.categories && p.categories.includes(activeCategory))
     : photos
 
   const openLightbox = (photoSrc: string) => {
@@ -105,6 +105,7 @@ export default function PhotoGallery({ photos = brand.photos }: PhotoGalleryProp
                   className="object-contain"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 25vw"
                   quality={85}
+                  unoptimized={photo.src.startsWith('https://fnbxlfpzhhxyalzghbzr.supabase.co') || photo.src.includes('photo22.jpg') || photo.src.includes('photo21.jpg') || photo.src.includes('photo23.jpg') || photo.src.includes('photo24.jpg') || photo.src.includes('photo25.jpg') || photo.src.includes('photo26.jpg') || photo.src.includes('photo27.jpg') || photo.src.includes('photo28.jpg') || photo.src.includes('photo29.jpg') || photo.src.includes('photo30.jpg') || photo.src.includes('photo31.jpg') || photo.src.includes('photo32.jpg') || photo.src.includes('photo34.jpg') || photo.src.includes('photo35.jpg') || photo.src.includes('photo36.jpg')}
                 />
 
                 {/* Overlay on hover - only show for full gallery, not home page */}
@@ -113,7 +114,7 @@ export default function PhotoGallery({ photos = brand.photos }: PhotoGalleryProp
                     <div className="text-center p-4">
                       <Maximize2 className="w-6 h-6 text-white mx-auto mb-2 opacity-80 group-hover:scale-110 transition-transform" />
                       <span className="text-[10px] tracking-widest uppercase text-white/90 font-medium block">
-                        {photo.category}
+                        {photo.categories ? photo.categories[0] : ''}
                       </span>
                     </div>
                   </div>
@@ -169,6 +170,7 @@ export default function PhotoGallery({ photos = brand.photos }: PhotoGalleryProp
                   className="object-contain"
                   sizes="100vw"
                   priority
+                  unoptimized={photos[lightboxIndex].src.startsWith('https://fnbxlfpzhhxyalzghbzr.supabase.co') || photos[lightboxIndex].src.includes('photo22.jpg') || photos[lightboxIndex].src.includes('photo21.jpg') || photos[lightboxIndex].src.includes('photo23.jpg') || photos[lightboxIndex].src.includes('photo24.jpg') || photos[lightboxIndex].src.includes('photo25.jpg') || photos[lightboxIndex].src.includes('photo26.jpg') || photos[lightboxIndex].src.includes('photo27.jpg') || photos[lightboxIndex].src.includes('photo28.jpg') || photos[lightboxIndex].src.includes('photo29.jpg') || photos[lightboxIndex].src.includes('photo30.jpg') || photos[lightboxIndex].src.includes('photo31.jpg') || photos[lightboxIndex].src.includes('photo32.jpg') || photos[lightboxIndex].src.includes('photo34.jpg') || photos[lightboxIndex].src.includes('photo35.jpg') || photos[lightboxIndex].src.includes('photo36.jpg')}
                 />
               </motion.div>
               
@@ -179,7 +181,7 @@ export default function PhotoGallery({ photos = brand.photos }: PhotoGalleryProp
                 </span>
                 <span className="mx-2 text-white/30">|</span>
                 <span className="uppercase text-[10px] text-accent tracking-widest font-semibold">
-                  {photos[lightboxIndex].category}
+                  {photos[lightboxIndex].categories ? photos[lightboxIndex].categories.join(', ') : ''}
                 </span>
               </div>
             </div>

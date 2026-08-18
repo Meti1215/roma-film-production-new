@@ -1,14 +1,94 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { brand } from '@/lib/brand'
 import { Check, MessageSquare } from 'lucide-react'
 
+interface Package {
+  id: string;
+  title: string;
+  subtitle: string;
+  price: number | null;
+  features: string[];
+  highlighted: boolean;
+  cta_text: string;
+}
+
 export default function Packages() {
+  const [packages, setPackages] = useState<Package[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchPackages() {
+      try {
+        const response = await fetch('/api/packages');
+        const data = await response.json();
+        
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        
+        setPackages(data.packages || []);
+      } catch (err) {
+        console.error('Failed to fetch packages:', err);
+        setError('Failed to load packages');
+        // Fallback to brand packages if Supabase fails
+        setPackages(brand.packages.map((pkg: any) => ({
+          id: pkg.title,
+          title: pkg.title,
+          subtitle: pkg.subtitle,
+          price: null,
+          features: pkg.features,
+          highlighted: pkg.highlighted || false,
+          cta_text: pkg.ctaText,
+        })));
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchPackages();
+  }, []);
+
   // Build dynamic WhatsApp link based on the centralized configuration
   const cleanWhatsAppNumber = brand.whatsAppNumber.replace(/[+\s\-()]/g, '')
   const whatsAppUrl = `https://wa.me/${cleanWhatsAppNumber}?text=Hi!%20I'm%20interested%20in%20your%20packages%20for%20Roma%20Film%20Production.%20Could%20you%20please%20share%20the%20details?`
+
+  function formatPrice(price: number | null): string {
+    if (price === null) return "";
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(price);
+  }
+
+  if (loading) {
+    return (
+      <section id="packages" className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-secondary/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-8 md:mb-12">
+            <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-accent mb-3 block">
+              Collections & Investment
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-medium tracking-wide mb-6 text-foreground">
+              Packages
+            </h2>
+            <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mb-6" />
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              All our collections are crafted to provide exceptional coverage. Contact us to receive our detailed digital brochure with collections information.
+            </p>
+          </div>
+          <div className="text-center text-muted-foreground">
+            Loading packages...
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="packages" className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-secondary/30">
@@ -30,13 +110,13 @@ export default function Packages() {
 
         {/* Packages Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {brand.packages.map((pkg, idx) => {
+          {packages.map((pkg, idx) => {
             const isCustom = pkg.title.toLowerCase().includes('custom')
             const actionLink = isCustom ? '/contact' : whatsAppUrl
 
             return (
               <motion.div
-                key={pkg.title}
+                key={pkg.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
@@ -59,9 +139,16 @@ export default function Packages() {
                   <h3 className="text-lg md:text-xl font-heading font-medium text-foreground tracking-wide mb-1">
                     {pkg.title}
                   </h3>
-                  <p className="text-[10px] text-muted-foreground italic mb-6 font-light">
+                  <p className="text-[10px] text-muted-foreground italic mb-4 font-light">
                     {pkg.subtitle}
                   </p>
+                  
+                  {/* Price Display */}
+                  {pkg.price && (
+                    <p className="text-2xl font-heading font-semibold text-accent mb-4">
+                      {formatPrice(pkg.price)}
+                    </p>
+                  )}
                   
                   <div className="w-8 h-[1px] bg-gradient-to-r from-transparent via-accent/60 to-transparent mb-6" />
 
@@ -87,7 +174,7 @@ export default function Packages() {
                       : 'bg-transparent text-foreground border-border hover:border-accent hover:text-accent'
                   }`}
                 >
-                  {pkg.ctaText}
+                  {pkg.cta_text}
                 </a>
               </motion.div>
             )
