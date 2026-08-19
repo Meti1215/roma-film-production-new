@@ -57,19 +57,19 @@ export const brand = {
       id: "baptism",
       title: "Baptism Coverage",
       description: "Respectful and beautiful coverage of your child's baptism ceremony, capturing family connections and sacred details.",
-      image: "/images/photos/photo8.jpg",
+      image: "/images/photos/photo31.jpg",
     },
     {
       id: "graduation",
       title: "Graduation Photography & Videography",
       description: "Celebrating milestone accomplishments with premium individual portrait sessions and highlight reels.",
-      image: "/images/photos/photo9.jpg",
+      image: "/images/photos/photo36.jpg",
     },
     {
       id: "birthday-family",
       title: "Birthday & Family Events",
       description: "Vibrant and natural coverage of birthdays, anniversaries, and family reunions that preserves memories for generations.",
-      image: "/images/photos/photo5.jpg",
+      image: "/images/photos/photo7.jpg",
     },
     {
       id: "drone",
@@ -81,7 +81,7 @@ export const brand = {
       id: "event-highlights",
       title: "Event Highlight Films",
       description: "Energetic and beautifully edited summaries of social, corporate, and private celebrations.",
-      image: "/images/photos/photo7.jpg",
+      image: "/images/photos/photo30.jpg",
     },
   ],
 
