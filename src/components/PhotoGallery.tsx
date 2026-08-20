@@ -48,8 +48,8 @@ export default function PhotoGallery({ photos = brand.photos }: PhotoGalleryProp
   }
 
   return (
-    <section id="photos" className={`${isHomePage ? 'py-4 md:py-6' : 'py-8 md:py-12'} px-4 sm:px-6 lg:px-8 bg-background`}>
-      <div className="max-w-7xl mx-auto">
+    <section id="photos" className={`${isHomePage ? 'py-4 md:py-6 px-4 sm:px-6 lg:px-8' : 'py-8 md:py-12 px-3 sm:px-4 lg:px-5'} bg-background`}>
+      <div className={`${isHomePage ? 'max-w-7xl' : 'max-w-none'} mx-auto`}>
 
         {/* Title */}
         <div className={`text-center max-w-2xl mx-auto ${isHomePage ? 'mb-3' : 'mb-6'}`}>
@@ -82,47 +82,39 @@ export default function PhotoGallery({ photos = brand.photos }: PhotoGalleryProp
         )}
 
         {/* Photos Grid */}
-        <motion.div
-          layout
-          className="grid gap-2 grid-cols-2 lg:grid-cols-4"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredPhotos.map((photo, index) => (
-              <motion.div
-                key={photo.src}
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-                onClick={() => openLightbox(photo.src)}
-                className="group relative cursor-pointer photo-hover-trigger bg-transparent aspect-[3/4] overflow-hidden"
-              >
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-[repeat(4,22%)] lg:justify-between">
+          {filteredPhotos.map((photo) => (
+            <div
+              key={photo.src}
+              onClick={() => openLightbox(photo.src)}
+              className="group relative aspect-[3/4] cursor-pointer overflow-hidden bg-transparent photo-hover-trigger"
+            >
                 <Image
                   src={photo.src}
                   alt={photo.alt}
                   fill
-                  className="object-contain"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 25vw"
+                  className="h-full w-full object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  loading="eager"
+                  priority
                   quality={85}
                   unoptimized={photo.src.startsWith('https://fnbxlfpzhhxyalzghbzr.supabase.co') || photo.src.includes('photo22.jpg') || photo.src.includes('photo21.jpg') || photo.src.includes('photo23.jpg') || photo.src.includes('photo24.jpg') || photo.src.includes('photo25.jpg') || photo.src.includes('photo26.jpg') || photo.src.includes('photo27.jpg') || photo.src.includes('photo28.jpg') || photo.src.includes('photo29.jpg') || photo.src.includes('photo30.jpg') || photo.src.includes('photo31.jpg') || photo.src.includes('photo32.jpg') || photo.src.includes('photo34.jpg') || photo.src.includes('photo35.jpg') || photo.src.includes('photo36.jpg')}
                 />
 
-                {/* Overlay on hover - only show for full gallery, not home page */}
-                {!isHomePage && (
-                  <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10 pointer-events-none">
-                    <div className="text-center p-4">
-                      <Maximize2 className="w-6 h-6 text-white mx-auto mb-2 opacity-80 group-hover:scale-110 transition-transform" />
-                      <span className="text-[10px] tracking-widest uppercase text-white/90 font-medium block">
-                        {photo.categories ? photo.categories[0] : ''}
-                      </span>
-                    </div>
+              {/* Overlay on hover - only show for full gallery, not home page */}
+              {!isHomePage && (
+                <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10 pointer-events-none">
+                  <div className="text-center p-4">
+                    <Maximize2 className="w-6 h-6 text-white mx-auto mb-2 opacity-80 group-hover:scale-110 transition-transform" />
+                    <span className="text-[10px] tracking-widest uppercase text-white/90 font-medium block">
+                      {photo.categories ? photo.categories[0] : ''}
+                    </span>
                   </div>
-                )}
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
 
       </div>
 

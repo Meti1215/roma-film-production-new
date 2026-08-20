@@ -3,6 +3,7 @@ import Navigation from '@/components/Navigation'
 import PhotoGallery from '@/components/PhotoGallery'
 import Footer from '@/components/Footer'
 import { createClient } from '@/lib/supabase/server'
+import { isSupabaseConfigured } from '@/lib/supabase/config'
 import { brand } from '@/lib/brand'
 
 // Normalize category names to match existing system
@@ -21,17 +22,26 @@ function normalizeCategory(category: string | null): string {
 }
 
 export default async function PhotosPage() {
-  const supabase = await createClient()
+  let supabasePhotos: Array<{
+    image_url: string
+    title: string
+    category: string | null
+  }> = []
 
-  const { data: supabasePhotos } = await supabase
-    .from('photos')
-    .select('*')
-    .order('created_at', { ascending: false })
+  if (isSupabaseConfigured()) {
+    const supabase = await createClient()
+    const { data } = await supabase
+      .from('photos')
+      .select('image_url, title, category')
+      .order('created_at', { ascending: false })
+
+    supabasePhotos = data || []
+  }
 
   const mappedSupabasePhotos = supabasePhotos?.map(photo => ({
     src: photo.image_url,
     alt: photo.title,
-    category: normalizeCategory(photo.category),
+    categories: [normalizeCategory(photo.category)],
   })) || []
 
   const allPhotos = [...mappedSupabasePhotos, ...brand.photos]

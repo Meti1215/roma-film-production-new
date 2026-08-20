@@ -11,6 +11,8 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
+  const isHomePage = pathname === '/'
+  const navigationIsSolid = !isHomePage || isScrolled
 
   const navLinks = [
     { name: 'Home', href: '/' },
@@ -31,8 +33,9 @@ export default function Navigation() {
       }
     }
     window.addEventListener('scroll', handleScroll)
+    handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [pathname])
 
   // Close mobile drawer on route change
   useEffect(() => {
@@ -68,7 +71,9 @@ export default function Navigation() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
+          isHomePage && !isScrolled ? '-translate-y-full opacity-0 pointer-events-none' : ''
+        } ${
+          navigationIsSolid
             ? 'glass-nav py-4 shadow-cinematic'
             : 'bg-gradient-to-b from-black/70 to-transparent py-6'
         }`}
@@ -93,7 +98,7 @@ export default function Navigation() {
                   className={`text-xs uppercase tracking-wider font-medium hover:text-accent transition-colors duration-250 relative group ${
                     isActive(link.href)
                       ? 'text-accent'
-                      : isScrolled
+                      : navigationIsSolid
                         ? 'text-foreground'
                         : 'text-white'
                   }`}
@@ -122,7 +127,7 @@ export default function Navigation() {
             <div className="md:hidden flex items-center">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`${isScrolled ? 'text-foreground' : 'text-white'} focus:outline-none p-1.5`}
+                className={`${navigationIsSolid ? 'text-foreground' : 'text-white'} focus:outline-none p-1.5`}
                 aria-label="Toggle navigation menu"
               >
                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

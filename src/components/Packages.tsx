@@ -24,6 +24,10 @@ export default function Packages() {
     async function fetchPackages() {
       try {
         const response = await fetch('/api/packages');
+        if (!response.ok) {
+          throw new Error(`Packages request failed with status ${response.status}`);
+        }
+
         const data = await response.json();
         
         if (data.error) {

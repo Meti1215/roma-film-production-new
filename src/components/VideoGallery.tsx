@@ -28,8 +28,7 @@ interface VideoGalleryProps {
 }
 
 export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryProps) {
-  const [videos, setVideos] = useState<LegacyVideo[]>([]);
-  const [loading, setLoading] = useState(fetchFromSupabase);
+  const [videos, setVideos] = useState<LegacyVideo[]>(brand.videos);
   const [activeVideoUrl, setActiveVideoUrl] = useState<string | null>(null)
   const [activeVideoTitle, setActiveVideoTitle] = useState<string>('')
 
@@ -78,13 +77,16 @@ export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryP
   useEffect(() => {
     if (!fetchFromSupabase) {
       setVideos(brand.videos);
-      setLoading(false);
       return;
     }
 
     async function fetchVideos() {
       try {
         const response = await fetch('/api/videos');
+        if (!response.ok) {
+          throw new Error(`Videos request failed with status ${response.status}`);
+        }
+
         const data = await response.json();
         
         if (data.error) {
@@ -118,8 +120,6 @@ export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryP
         console.error('Failed to fetch videos:', err);
         // Fallback to brand videos if Supabase fails
         setVideos(brand.videos);
-      } finally {
-        setLoading(false);
       }
     }
 
@@ -136,43 +136,19 @@ export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryP
     setActiveVideoTitle('')
   }
 
-  if (loading) {
-    return (
-      <section id="videos" className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-secondary/30">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-8 md:mb-12">
-            <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-accent mb-3 block">
-              Moving Frames
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-medium tracking-wide mb-6 text-foreground">
-              Videos
-            </h2>
-            <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mb-6" />
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Beautiful wedding films and highlight reels that tell your unique love story with cinematic color, composition, and emotional pace.
-            </p>
-          </div>
-          <div className="text-center text-muted-foreground">
-            Loading videos...
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <section id="videos" className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-secondary/30">
+    <section id="videos" className="py-8 md:py-10 px-4 sm:px-6 lg:px-8 bg-secondary/30">
       <div className="max-w-7xl mx-auto">
 
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-8 md:mb-12">
+        <div className="text-center max-w-2xl mx-auto mb-5 md:mb-7">
           <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-accent mb-3 block">
             Moving Frames
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-medium tracking-wide mb-6 text-foreground">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-medium tracking-wide mb-3 text-foreground">
             Videos
           </h2>
-          <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mb-6" />
+          <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mb-3" />
           <p className="text-sm text-muted-foreground leading-relaxed">
             Beautiful wedding films and highlight reels that tell your unique love story with cinematic color, composition, and emotional pace.
           </p>
@@ -183,27 +159,32 @@ export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryP
           {videos.map((video, idx) => (
             <motion.div
               key={`${video.title}-${idx}`}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.7, ease: 'easeOut', delay: idx * 0.15 }}
               className="group flex flex-col cursor-pointer"
               onClick={() => openVideoPlayer(video.videoUrl, video.title)}
             >
               {/* Thumbnail Container */}
-              <div className="relative w-full aspect-[16/9] max-h-[250px] overflow-hidden bg-black photo-hover-trigger">
-                {video.thumbnail.startsWith('http') ? (
+              <div className="relative w-full aspect-[16/9] max-h-[250px] overflow-hidden bg-transparent photo-hover-trigger">
+                {isDirectVideoUrl(video.videoUrl) ? (
+                  <video
+                    src={video.videoUrl}
+                    muted
+                    playsInline
+                    preload="auto"
+                    aria-label={`${video.title} Video Preview`}
+                    className="w-full h-full object-cover opacity-90 transition-transform duration-700"
+                  />
+                ) : video.thumbnail.startsWith('http') ? (
                   <img
                     src={video.thumbnail}
                     alt={`${video.title} Video Thumbnail`}
-                    className="w-full h-full object-contain opacity-90 transition-transform duration-700"
+                    className="w-full h-full object-cover opacity-90 transition-transform duration-700"
                   />
                 ) : (
                   <Image
                     src={video.thumbnail}
                     alt={`${video.title} Video Thumbnail`}
                     fill
-                    className="object-contain object-center opacity-90 transition-transform duration-700"
+                    className="w-full h-full object-cover object-center opacity-90 transition-transform duration-700"
                     sizes="(max-w-640px) 100vw, (max-w-1024px) 50vw, 50vw"
                   />
                 )}
@@ -266,13 +247,13 @@ export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryP
             </button>
 
             {/* Video container */}
-            <div className="relative w-full max-w-5xl max-h-[85vh] flex flex-col items-center px-2 sm:px-4">
+            <div className="relative flex h-full w-full flex-col items-center justify-center px-2 sm:px-4">
               <motion.div
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.3 }}
-                className="w-full aspect-video bg-black shadow-2xl relative rounded-lg overflow-hidden"
+                className="relative aspect-[9/16] w-[min(90vw,calc(85vh*9/16))] overflow-hidden rounded-lg bg-black shadow-2xl"
               >
                 {isYouTubeUrl(activeVideoUrl) ? (
                   <iframe
