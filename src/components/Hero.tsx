@@ -19,7 +19,7 @@ export default function Hero() {
           playsInline
           className="absolute inset-0 w-full h-full object-contain object-center opacity-80"
         >
-          <source src="/images/hero/hero.MOV" type="video/quicktime" />
+          <source src="/images/hero/hero.mp4" type="video/mp4" />
         </video>
         {/* Soft Dark Vignette Overlay for premium editorial readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/50 z-10" />

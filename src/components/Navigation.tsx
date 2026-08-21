@@ -76,10 +76,6 @@ export default function Navigation() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-[50] transition-all duration-300 ${
-          isHomePage && !isScrolled
-            ? '-translate-y-full opacity-0 pointer-events-none'
-            : ''
-        } ${
           navigationIsSolid
             ? 'glass-nav py-4 shadow-cinematic'
             : 'bg-gradient-to-b from-black/70 to-transparent py-6'
