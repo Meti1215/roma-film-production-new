@@ -82,7 +82,7 @@ export default function Services({
         {showIntro && <ServicesIntro />}
 
         {/* Services Grid */}
-        <div className="mx-auto grid w-full max-w-[90rem] grid-flow-row grid-cols-3 gap-2 md:gap-4">
+        <div className="mx-auto grid w-full max-w-[60rem] grid-flow-row grid-cols-3 gap-1.5 md:gap-4">
           {brand.services.map((service, idx) => {
             const IconComponent = serviceIcons[service.id] || Camera
 
@@ -98,12 +98,12 @@ export default function Services({
                   delay: (idx % 3) * 0.08,
                 }}
                 className={`group relative bg-card border border-border/50 rounded-sm hover:border-accent/70 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-cinematic hover:shadow-tan-glow ${
-                  !showImages ? 'min-h-[145px]' : 'min-h-[240px]'
+                  !showImages ? 'min-h-[145px]' : 'min-h-[200px]'
                 }`}
               >
                 {showImages ? (
                   /* Visual Header Image with dark overlay */
-                  <div className="relative h-28 w-full overflow-hidden bg-muted sm:h-32 md:h-36">
+                  <div className="relative h-24 w-full overflow-hidden bg-muted sm:h-32 md:h-40">
                     <Image
                       src={service.image}
                       alt={service.title}
@@ -133,20 +133,20 @@ export default function Services({
                 )}
 
                 {/* Body Text */}
-                <div className="p-1.5 sm:p-2 md:p-3 flex-grow flex flex-col justify-between">
+                <div className="p-1.5 sm:p-2 md:p-2.5 flex-grow flex flex-col justify-between">
                   <div>
-                    <h3 className="text-sm md:text-base font-heading font-medium tracking-wide mb-1 text-foreground group-hover:text-accent transition-colors">
+                    <h3 className="text-[10px] sm:text-xs md:text-sm font-heading font-medium tracking-wide mb-0.5 text-foreground group-hover:text-accent transition-colors">
                       {service.title}
                     </h3>
 
-                    <p className="line-clamp-2 text-[11px] md:text-xs text-muted-foreground leading-relaxed mb-2 font-light">
+                    <p className="text-[8px] sm:text-[10px] md:text-[11px] text-muted-foreground leading-relaxed mb-1 font-light">
                       {service.description}
                     </p>
                   </div>
 
                   <Link
-                    href="/contact"
-                    className="text-[8px] uppercase tracking-widest font-semibold text-foreground group-hover:text-accent transition-colors flex items-center gap-1"
+                    href={`/contact?service=${service.id}`}
+                    className="text-[7px] sm:text-[8px] uppercase tracking-widest font-semibold text-foreground group-hover:text-accent transition-colors flex items-center gap-0.5"
                   >
                     Inquire Details
                     <span className="group-hover:translate-x-1 transition-transform inline-block">
