@@ -11,6 +11,7 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
+
   const isHomePage = pathname === '/'
   const navigationIsSolid = !isHomePage || isScrolled
 
@@ -32,8 +33,10 @@ export default function Navigation() {
         setIsScrolled(false)
       }
     }
+
     window.addEventListener('scroll', handleScroll)
     handleScroll()
+
     return () => window.removeEventListener('scroll', handleScroll)
   }, [pathname])
 
@@ -53,6 +56,7 @@ export default function Navigation() {
       document.body.style.position = ''
       document.body.style.width = ''
     }
+
     return () => {
       document.body.style.overflow = ''
       document.body.style.position = ''
@@ -64,17 +68,22 @@ export default function Navigation() {
     if (href === '/') {
       return pathname === '/'
     }
+
     return pathname.startsWith(href)
   }
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isHomePage && !isScrolled ? '-translate-y-full opacity-0 pointer-events-none' : ''
-          } ${navigationIsSolid
+        className={`fixed top-0 left-0 right-0 z-[50] transition-all duration-300 ${
+          isHomePage && !isScrolled
+            ? '-translate-y-full opacity-0 pointer-events-none'
+            : ''
+        } ${
+          navigationIsSolid
             ? 'glass-nav py-4 shadow-cinematic'
             : 'bg-gradient-to-b from-black/70 to-transparent py-6'
-          }`}
+        }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -93,15 +102,21 @@ export default function Navigation() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-xs uppercase tracking-wider font-medium hover:text-accent transition-colors duration-250 relative group ${isActive(link.href)
+                  className={`text-xs uppercase tracking-wider font-medium hover:text-accent transition-colors duration-250 relative group ${
+                    isActive(link.href)
                       ? 'text-accent'
                       : navigationIsSolid
                         ? 'text-foreground'
                         : 'text-white'
-                    }`}
+                  }`}
                 >
                   {link.name}
-                  <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ${isActive(link.href) ? 'scale-x-100' : ''}`} />
+
+                  <span
+                    className={`absolute bottom-0 left-0 w-full h-0.5 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ${
+                      isActive(link.href) ? 'scale-x-100' : ''
+                    }`}
+                  />
                 </Link>
               ))}
             </nav>
@@ -110,10 +125,11 @@ export default function Navigation() {
             <div className="hidden md:block">
               <Link
                 href="/contact"
-                className={`px-5 py-2.5 text-xs uppercase tracking-widest font-semibold transition-all duration-300 border shadow-cinematic ${isScrolled
+                className={`px-5 py-2.5 text-xs uppercase tracking-widest font-semibold transition-all duration-300 border shadow-cinematic ${
+                  isScrolled
                     ? 'bg-accent text-accent-foreground border-accent hover:bg-accent/90 hover:shadow-tan-glow'
                     : 'bg-accent text-accent-foreground border-accent hover:bg-accent/90 hover:shadow-tan-glow'
-                  }`}
+                }`}
               >
                 Book a Session
               </Link>
@@ -123,10 +139,16 @@ export default function Navigation() {
             <div className="md:hidden flex items-center">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`${navigationIsSolid ? 'text-foreground' : 'text-white'} focus:outline-none p-1.5`}
+                className={`${
+                  navigationIsSolid ? 'text-foreground' : 'text-white'
+                } focus:outline-none p-1.5`}
                 aria-label="Toggle navigation menu"
               >
-                {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {isOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
               </button>
             </div>
           </div>
@@ -140,7 +162,7 @@ export default function Navigation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] bg-background md:hidden flex flex-col min-h-[100dvh]"
+            className="fixed inset-0 z-[200] bg-background md:hidden flex flex-col min-h-[100dvh]"
           >
             {/* Header with Logo and Close Button */}
             <div className="flex items-center justify-between px-6 py-6 border-b border-border">
@@ -151,6 +173,7 @@ export default function Navigation() {
                   className="h-12 w-auto"
                 />
               </Link>
+
               <button
                 onClick={() => setIsOpen(false)}
                 className="text-foreground focus:outline-none p-2"
@@ -172,8 +195,12 @@ export default function Navigation() {
                 >
                   <Link
                     href={link.href}
-                    className={`block text-center text-xl uppercase tracking-widest font-semibold hover:text-accent transition-colors py-4 ${isActive(link.href) ? 'text-accent' : 'text-foreground'
-                      }`}
+                    className={`block text-center text-xl uppercase tracking-widest font-semibold hover:text-accent transition-colors py-4 ${
+                      isActive(link.href)
+                        ? 'text-accent'
+                        : 'text-foreground'
+                    }`}
+                    onClick={() => setIsOpen(false)}
                   >
                     {link.name}
                   </Link>
@@ -188,6 +215,7 @@ export default function Navigation() {
               >
                 <Link
                   href="/contact"
+                  onClick={() => setIsOpen(false)}
                   className="px-8 py-3.5 bg-primary text-primary-foreground text-sm uppercase tracking-widest font-bold hover:bg-accent hover:text-accent-foreground transition-all duration-300 inline-block text-center border border-transparent hover:border-accent"
                 >
                   Book a Session
@@ -197,11 +225,18 @@ export default function Navigation() {
 
             {/* Mobile Drawer Footer Contacts */}
             <div className="border-t border-border pt-6 pb-8 px-6 flex flex-col items-center space-y-3 text-center text-sm text-muted-foreground">
-              <a href={brand.phoneHref} className="flex items-center gap-2 hover:text-accent">
+              <a
+                href={brand.phoneHref}
+                className="flex items-center gap-2 hover:text-accent"
+              >
                 <Phone className="w-4 h-4" />
                 {brand.phone}
               </a>
-              <a href={brand.emailHref} className="flex items-center gap-2 hover:text-accent">
+
+              <a
+                href={brand.emailHref}
+                className="flex items-center gap-2 hover:text-accent"
+              >
                 <Mail className="w-4 h-4" />
                 {brand.email}
               </a>

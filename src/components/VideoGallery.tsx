@@ -7,20 +7,20 @@ import { brand } from '@/lib/brand'
 import { Play, X } from 'lucide-react'
 
 interface Video {
-  id: string;
-  title: string;
-  category: string;
-  video_url: string;
-  thumbnail_url: string | null;
+  id: string
+  title: string
+  category: string | null
+  video_url: string
+  thumbnail_url: string | null
 }
 
 interface LegacyVideo {
-  title: string;
-  subtitle: string;
-  category: string;
-  duration: string;
-  thumbnail: string;
-  videoUrl: string;
+  title: string
+  subtitle: string
+  category: string
+  duration: string
+  thumbnail: string
+  videoUrl: string
 }
 
 interface VideoGalleryProps {
@@ -28,104 +28,115 @@ interface VideoGalleryProps {
   homeMobileTwoColumns?: boolean
 }
 
-export default function VideoGallery({ fetchFromSupabase = true, homeMobileTwoColumns = false }: VideoGalleryProps) {
-  const [videos, setVideos] = useState<LegacyVideo[]>(brand.videos);
+export default function VideoGallery({
+  fetchFromSupabase = true,
+  homeMobileTwoColumns = false,
+}: VideoGalleryProps) {
+  const [videos, setVideos] = useState<LegacyVideo[]>(brand.videos)
   const [activeVideoUrl, setActiveVideoUrl] = useState<string | null>(null)
   const [activeVideoTitle, setActiveVideoTitle] = useState<string>('')
 
-  // Helper functions - defined before useEffect
   function getYouTubeVideoId(url: string): string | null {
     const patterns = [
       /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
-      /youtube\.com\/watch\?.*v=([^&\n?#]+)/
-    ];
+      /youtube\.com\/watch\?.*v=([^&\n?#]+)/,
+    ]
 
     for (const pattern of patterns) {
-      const match = url.match(pattern);
+      const match = url.match(pattern)
+
       if (match && match[1]) {
-        return match[1];
+        return match[1]
       }
     }
 
-    return null;
+    return null
   }
 
   function isYouTubeUrl(url: string): boolean {
-    return getYouTubeVideoId(url) !== null;
+    return getYouTubeVideoId(url) !== null
   }
 
   function getYouTubeEmbedUrl(url: string): string {
-    const videoId = getYouTubeVideoId(url);
+    const videoId = getYouTubeVideoId(url)
+
     if (videoId) {
-      return `https://www.youtube.com/embed/${videoId}`;
+      return `https://www.youtube.com/embed/${videoId}`
     }
-    return url;
+
+    return url
   }
 
   function isDirectVideoUrl(url: string): boolean {
-    const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.avi', '.mkv'];
-    return videoExtensions.some(ext => url.toLowerCase().endsWith(ext));
+    const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.avi', '.mkv']
+
+    return videoExtensions.some((ext) =>
+      url.toLowerCase().endsWith(ext)
+    )
   }
 
   function getYouTubeThumbnailUrl(url: string): string | null {
-    const videoId = getYouTubeVideoId(url);
+    const videoId = getYouTubeVideoId(url)
+
     if (videoId) {
-      return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+      return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
     }
-    return null;
+
+    return null
   }
 
   useEffect(() => {
     if (!fetchFromSupabase) {
-      setVideos(brand.videos);
-      return;
+      setVideos(brand.videos)
+      return
     }
 
     async function fetchVideos() {
       try {
-        const response = await fetch('/api/videos');
+        const response = await fetch('/api/videos')
+
         if (!response.ok) {
-          throw new Error(`Videos request failed with status ${response.status}`);
+          throw new Error(
+            `Videos request failed with status ${response.status}`
+          )
         }
 
-        const data = await response.json();
+        const data = await response.json()
 
         if (data.error) {
-          throw new Error(data.error);
+          throw new Error(data.error)
         }
 
-        // Map Supabase videos to legacy format
         const mappedVideos = (data.videos || []).map((video: Video) => {
-          // Use custom thumbnail if provided, otherwise use YouTube thumbnail for YouTube videos, or fallback
-          let thumbnail = video.thumbnail_url;
+          let thumbnail = video.thumbnail_url
+
           if (!thumbnail && isYouTubeUrl(video.video_url)) {
-            thumbnail = getYouTubeThumbnailUrl(video.video_url);
+            thumbnail = getYouTubeThumbnailUrl(video.video_url)
           }
+
           if (!thumbnail) {
-            thumbnail = "/images/photos/photo8.jpg";
+            thumbnail = '/images/photos/photo8.jpg'
           }
 
           return {
             title: video.title,
-            subtitle: video.category,
-            category: video.category,
-            duration: "Short", // Default duration since it's not in Supabase
-            thumbnail: thumbnail,
+            subtitle: video.category || 'Video',
+            category: video.category || 'Video',
+            duration: 'Short',
+            thumbnail,
             videoUrl: video.video_url,
-          };
-        });
+          }
+        })
 
-        // Combine with existing brand videos
-        setVideos([...mappedVideos, ...brand.videos]);
+        setVideos([...mappedVideos, ...brand.videos])
       } catch (err) {
-        console.error('Failed to fetch videos:', err);
-        // Fallback to brand videos if Supabase fails
-        setVideos(brand.videos);
+        console.error('Failed to fetch videos:', err)
+        setVideos(brand.videos)
       }
     }
 
-    fetchVideos();
-  }, [fetchFromSupabase]);
+    fetchVideos()
+  }, [fetchFromSupabase])
 
   const openVideoPlayer = (url: string, title: string) => {
     setActiveVideoUrl(url)
@@ -138,33 +149,47 @@ export default function VideoGallery({ fetchFromSupabase = true, homeMobileTwoCo
   }
 
   return (
-    <section id="videos" className="py-8 md:py-10 px-4 sm:px-6 lg:px-8 bg-secondary/30">
-      <div className="max-w-7xl mx-auto">
-
+    <section
+      id="videos"
+      className="py-8 md:py-10 px-4 sm:px-6 lg:px-8 bg-secondary/30 w-full"
+    >
+      <div className="max-w-7xl mx-auto w-full">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-5 md:mb-7">
           <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-accent mb-3 block">
             Moving Frames
           </span>
+
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-medium tracking-wide mb-3 text-foreground">
             Videos
           </h2>
+
           <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mb-3" />
+
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Beautiful wedding films and highlight reels that tell your unique love story with cinematic color, composition, and emotional pace.
+            Beautiful wedding films and highlight reels that tell your unique
+            love story with cinematic color, composition, and emotional pace.
           </p>
         </div>
 
         {/* Video Grid */}
-        <div className={`${homeMobileTwoColumns ? 'grid grid-cols-2 sm:grid-cols-2 gap-4 md:gap-8 lg:gap-12' : 'grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 lg:gap-12'}`}>
+        <div
+          className={
+            homeMobileTwoColumns
+              ? 'grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8 lg:gap-12'
+              : 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-12 w-full'
+          }
+        >
           {videos.map((video, idx) => (
             <motion.div
               key={`${video.title}-${idx}`}
               className="group flex flex-col cursor-pointer"
-              onClick={() => openVideoPlayer(video.videoUrl, video.title)}
+              onClick={() =>
+                openVideoPlayer(video.videoUrl, video.title)
+              }
             >
               {/* Thumbnail Container */}
-              <div className="relative w-full aspect-[16/9] max-h-[250px] overflow-hidden bg-transparent photo-hover-trigger">
+              <div className="relative w-full aspect-[16/9] overflow-hidden bg-transparent photo-hover-trigger rounded-lg">
                 {isDirectVideoUrl(video.videoUrl) ? (
                   <video
                     src={video.videoUrl}
@@ -186,7 +211,7 @@ export default function VideoGallery({ fetchFromSupabase = true, homeMobileTwoCo
                     alt={`${video.title} Video Thumbnail`}
                     fill
                     className="w-full h-full object-cover object-center opacity-90 transition-transform duration-700"
-                    sizes="(max-w-640px) 100vw, (max-w-1024px) 50vw, 50vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 33vw"
                   />
                 )}
 
@@ -214,6 +239,7 @@ export default function VideoGallery({ fetchFromSupabase = true, homeMobileTwoCo
                   <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-medium tracking-wide text-foreground group-hover:text-accent transition-colors line-clamp-2">
                     {video.title}
                   </h3>
+
                   <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mt-1 block">
                     {video.subtitle}
                   </span>
@@ -226,7 +252,6 @@ export default function VideoGallery({ fetchFromSupabase = true, homeMobileTwoCo
             </motion.div>
           ))}
         </div>
-
       </div>
 
       {/* Video Modal Player */}
@@ -236,12 +261,12 @@ export default function VideoGallery({ fetchFromSupabase = true, homeMobileTwoCo
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-2 sm:p-4 md:p-6"
+            className="fixed inset-0 z-[150] bg-black/95 flex items-center justify-center p-2 sm:p-4 md:p-6"
           >
             {/* Close Button */}
             <button
               onClick={closeVideoPlayer}
-              className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white/70 hover:text-white focus:outline-none p-2 z-50 transition-colors"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white/70 hover:text-white focus:outline-none p-2 z-[160] transition-colors"
               aria-label="Close video player"
             >
               <X className="w-6 h-6 sm:w-8 sm:h-8" />
@@ -254,7 +279,7 @@ export default function VideoGallery({ fetchFromSupabase = true, homeMobileTwoCo
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.3 }}
-                className="relative aspect-[9/16] w-[min(90vw,calc(85vh*9/16))] overflow-hidden rounded-lg bg-black shadow-2xl"
+                className="relative aspect-[16/9] w-[min(90vw,calc(85vh*16/9))] overflow-hidden rounded-lg bg-black shadow-2xl"
               >
                 {isYouTubeUrl(activeVideoUrl) ? (
                   <iframe
@@ -274,6 +299,7 @@ export default function VideoGallery({ fetchFromSupabase = true, homeMobileTwoCo
                   />
                 )}
               </motion.div>
+
               <h4 className="mt-3 sm:mt-4 text-white font-heading text-base sm:text-lg md:text-xl tracking-wide text-center px-4">
                 {activeVideoTitle}
               </h4>
