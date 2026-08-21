@@ -70,9 +70,7 @@ export default function Navigation() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isHomePage && !isScrolled ? '-translate-y-full opacity-0 pointer-events-none' : ''
-        } ${
+        className={`fixed top-0 left-0 right-0 z-[50] transition-all duration-300 ${
           navigationIsSolid
             ? 'glass-nav py-4 shadow-cinematic'
             : 'bg-gradient-to-b from-black/70 to-transparent py-6'
@@ -144,7 +142,7 @@ export default function Navigation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] bg-background md:hidden flex flex-col min-h-[100dvh]"
+            className="fixed inset-0 z-[200] bg-background md:hidden flex flex-col min-h-[100dvh]"
           >
             {/* Header with Logo and Close Button */}
             <div className="flex items-center justify-between px-6 py-6 border-b border-border">

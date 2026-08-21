@@ -7,7 +7,7 @@ import { updateVideo } from "../../actions";
 interface Video {
   id: string;
   title: string;
-  category: string;
+  category: string | null;
   video_url: string;
   thumbnail_url: string | null;
 }
@@ -19,14 +19,11 @@ export default function EditVideoPage() {
 
   const [video, setVideo] = useState<Video | null>(null);
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
-
-  const categories = ["Wedding", "Couples", "Family", "Events", "Portrait", "Other", "Highlight Film"];
 
   useEffect(() => {
     async function fetchVideo() {
@@ -48,7 +45,6 @@ export default function EditVideoPage() {
 
       setVideo(data.video);
       setTitle(data.video.title);
-      setCategory(data.video.category);
       setVideoUrl(data.video.video_url);
       setThumbnailUrl(data.video.thumbnail_url || "");
       setFetching(false);
@@ -64,7 +60,6 @@ export default function EditVideoPage() {
 
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("category", category);
     formData.append("video_url", videoUrl);
     formData.append("thumbnail_url", thumbnailUrl);
 
@@ -134,33 +129,10 @@ export default function EditVideoPage() {
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="e.g., Ethiopian Wedding Highlights"
+                placeholder="e.g., Ethiopian Wedding"
                 required
                 className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-black"
               />
-            </div>
-
-            <div>
-              <label
-                htmlFor="category"
-                className="mb-2 block text-sm font-medium text-gray-700"
-              >
-                Category
-              </label>
-              <select
-                id="category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                required
-                className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-black"
-              >
-                <option value="">Select a category</option>
-                {categories.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </select>
             </div>
 
             <div>
@@ -180,7 +152,7 @@ export default function EditVideoPage() {
                 className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-black"
               />
               <p className="mt-1 text-xs text-gray-500">
-                Supports direct video URLs (MP4, WebM, etc.)
+                Current video URL (cannot be changed)
               </p>
             </div>
 

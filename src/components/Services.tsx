@@ -64,7 +64,7 @@ export default function Services({ showImages = true }: ServicesProps) {
                       src={service.image}
                       alt={service.title}
                       fill
-                      className="h-full w-full object-cover object-center transition-transform duration-600 group-hover:scale-105"
+                      className="h-full w-full object-cover object-top transition-transform duration-600 group-hover:scale-105"
                       sizes="(max-w-768px) 100vw, (max-w-1024px) 50vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20" />

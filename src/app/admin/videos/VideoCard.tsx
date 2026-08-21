@@ -9,7 +9,7 @@ import { Play } from "lucide-react";
 interface Video {
   id: string;
   title: string;
-  category: string;
+  category: string | null;
   video_url: string;
   thumbnail_url: string | null;
 }
@@ -94,7 +94,7 @@ export default function VideoCard({ video }: VideoCardProps) {
           {video.title}
         </h3>
         <p className="mt-1 text-sm text-gray-500">
-          {video.category}
+          {video.category || "Video"}
         </p>
         <div className="mt-4 flex gap-2">
           <Link

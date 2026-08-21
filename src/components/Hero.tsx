@@ -26,7 +26,7 @@ export default function Hero() {
       </div>
 
       {/* Hero Contents */}
-      <div className="relative z-20 max-w-5xl mx-auto px-6 text-center flex flex-col items-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center">
         {/* Decorative Element */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -89,7 +89,7 @@ export default function Hero() {
       </div>
 
       {/* Bottom Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 opacity-60">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-60">
         <span className="text-[8px] uppercase tracking-[0.2em] font-medium text-white/70">Scroll</span>
         <div className="w-[1px] h-8 bg-white/30 relative overflow-hidden">
           <motion.div

@@ -9,7 +9,7 @@ import { Play, X } from 'lucide-react'
 interface Video {
   id: string;
   title: string;
-  category: string;
+  category: string | null;
   video_url: string;
   thumbnail_url: string | null;
 }
@@ -106,8 +106,8 @@ export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryP
 
           return {
             title: video.title,
-            subtitle: video.category,
-            category: video.category,
+            subtitle: video.category || "Video",
+            category: video.category || "Video",
             duration: "Short", // Default duration since it's not in Supabase
             thumbnail: thumbnail,
             videoUrl: video.video_url,
@@ -137,8 +137,8 @@ export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryP
   }
 
   return (
-    <section id="videos" className="py-8 md:py-10 px-4 sm:px-6 lg:px-8 bg-secondary/30">
-      <div className="max-w-7xl mx-auto">
+    <section id="videos" className="py-8 md:py-10 px-4 sm:px-6 lg:px-8 bg-secondary/30 w-full">
+      <div className="max-w-7xl mx-auto w-full">
 
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-5 md:mb-7">
@@ -155,7 +155,7 @@ export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryP
         </div>
 
         {/* Video Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-12 w-full">
           {videos.map((video, idx) => (
             <motion.div
               key={`${video.title}-${idx}`}
@@ -163,7 +163,7 @@ export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryP
               onClick={() => openVideoPlayer(video.videoUrl, video.title)}
             >
               {/* Thumbnail Container */}
-              <div className="relative w-full aspect-[16/9] max-h-[250px] overflow-hidden bg-transparent photo-hover-trigger">
+              <div className="relative w-full aspect-[16/9] overflow-hidden bg-transparent photo-hover-trigger rounded-lg">
                 {isDirectVideoUrl(video.videoUrl) ? (
                   <video
                     src={video.videoUrl}
@@ -185,7 +185,7 @@ export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryP
                     alt={`${video.title} Video Thumbnail`}
                     fill
                     className="w-full h-full object-cover object-center opacity-90 transition-transform duration-700"
-                    sizes="(max-w-640px) 100vw, (max-w-1024px) 50vw, 50vw"
+                    sizes="(max-w-640px) 100vw, (max-w-1024px) 50vw, (max-w-1280px) 33vw, 33vw"
                   />
                 )}
 
@@ -235,12 +235,12 @@ export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryP
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-2 sm:p-4 md:p-6"
+            className="fixed inset-0 z-[150] bg-black/95 flex items-center justify-center p-2 sm:p-4 md:p-6"
           >
             {/* Close Button */}
             <button
               onClick={closeVideoPlayer}
-              className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white/70 hover:text-white focus:outline-none p-2 z-50 transition-colors"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white/70 hover:text-white focus:outline-none p-2 z-[160] transition-colors"
               aria-label="Close video player"
             >
               <X className="w-6 h-6 sm:w-8 sm:h-8" />
@@ -253,7 +253,7 @@ export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryP
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.3 }}
-                className="relative aspect-[9/16] w-[min(90vw,calc(85vh*9/16))] overflow-hidden rounded-lg bg-black shadow-2xl"
+                className="relative aspect-[16/9] w-[min(90vw,calc(85vh*16/9))] overflow-hidden rounded-lg bg-black shadow-2xl"
               >
                 {isYouTubeUrl(activeVideoUrl) ? (
                   <iframe

@@ -1,4 +1,4 @@
-import { createServerClient } from "@supabase/ssr";
+updta eimport { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 
