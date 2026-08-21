@@ -51,7 +51,7 @@ export default function BookingForm() {
       newErrors.email = 'Email address is invalid'
     }
     if (!formData.serviceType) newErrors.serviceType = 'Please select a service type'
-    
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -78,7 +78,7 @@ export default function BookingForm() {
   }
 
   return (
-    <div className="w-full bg-card p-6 md:p-8 border border-border/80 shadow-sm relative">
+    <div className="relative w-full border border-border/80 bg-card p-2 shadow-sm sm:p-6 md:p-8">
       <AnimatePresence mode="wait">
         {!submitSuccess ? (
           <motion.form
@@ -87,7 +87,7 @@ export default function BookingForm() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onSubmit={handleSubmit}
-            className="space-y-5"
+            className="space-y-2 sm:space-y-5"
           >
             {/* Full Name */}
             <div>
@@ -102,15 +102,14 @@ export default function BookingForm() {
                 value={formData.fullName}
                 onChange={handleChange}
                 placeholder="e.g. Michael Smith"
-                className={`w-full px-4 py-3 bg-secondary/10 border text-xs text-foreground placeholder-muted-foreground/60 transition-colors focus:border-accent focus:ring-1 focus:ring-accent ${
-                  errors.fullName ? 'border-red-500' : 'border-border'
-                }`}
+                className={`w-full border bg-secondary/10 px-2 py-1.5 text-[9px] text-foreground placeholder-muted-foreground/60 transition-colors focus:border-accent focus:ring-1 focus:ring-accent sm:px-4 sm:py-3 sm:text-xs ${errors.fullName ? 'border-red-500' : 'border-border'
+                  }`}
               />
               {errors.fullName && <p className="text-[10px] text-red-500 mt-1">{errors.fullName}</p>}
             </div>
 
             {/* Grid layout for Phone & Email */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-5">
               {/* Phone */}
               <div>
                 <label htmlFor="phone" className="block text-[10px] uppercase tracking-wider font-semibold text-foreground mb-1.5">
@@ -123,7 +122,7 @@ export default function BookingForm() {
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder="+1 (214) 000-0000"
-                  className="w-full px-4 py-3 bg-secondary/10 border border-border text-xs text-foreground placeholder-muted-foreground/60 transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
+                  className="w-full border border-border bg-secondary/10 px-2 py-1.5 text-[9px] text-foreground placeholder-muted-foreground/60 transition-colors focus:border-accent focus:ring-1 focus:ring-accent sm:px-4 sm:py-3 sm:text-xs"
                 />
               </div>
 
@@ -140,16 +139,15 @@ export default function BookingForm() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="name@example.com"
-                  className={`w-full px-4 py-3 bg-secondary/10 border text-xs text-foreground placeholder-muted-foreground/60 transition-colors focus:border-accent focus:ring-1 focus:ring-accent ${
-                    errors.email ? 'border-red-500' : 'border-border'
-                  }`}
+                  className={`w-full px-4 py-3 bg-secondary/10 border text-xs text-foreground placeholder-muted-foreground/60 transition-colors focus:border-accent focus:ring-1 focus:ring-accent ${errors.email ? 'border-red-500' : 'border-border'
+                    }`}
                 />
                 {errors.email && <p className="text-[10px] text-red-500 mt-1">{errors.email}</p>}
               </div>
             </div>
 
             {/* Grid layout for Service Dropdown & Preferred Date */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-5">
               {/* Type of Service */}
               <div>
                 <label htmlFor="serviceType" className="block text-[10px] uppercase tracking-wider font-semibold text-foreground mb-1.5">
@@ -161,9 +159,8 @@ export default function BookingForm() {
                   required
                   value={formData.serviceType}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 bg-secondary/10 border text-xs text-foreground transition-colors focus:border-accent focus:ring-1 focus:ring-accent ${
-                    errors.serviceType ? 'border-red-500' : 'border-border'
-                  }`}
+                  className={`w-full border bg-secondary/10 px-2 py-1.5 text-[9px] text-foreground transition-colors focus:border-accent focus:ring-1 focus:ring-accent sm:px-4 sm:py-3 sm:text-xs ${errors.serviceType ? 'border-red-500' : 'border-border'
+                    }`}
                 >
                   <option value="" disabled className="text-muted-foreground/50">
                     Select a service...
@@ -188,7 +185,7 @@ export default function BookingForm() {
                   name="preferredDate"
                   value={formData.preferredDate}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-secondary/10 border border-border text-xs text-foreground transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
+                  className="w-full border border-border bg-secondary/10 px-2 py-1.5 text-[9px] text-foreground transition-colors focus:border-accent focus:ring-1 focus:ring-accent sm:px-4 sm:py-3 sm:text-xs"
                 />
               </div>
             </div>
@@ -201,11 +198,11 @@ export default function BookingForm() {
               <textarea
                 id="message"
                 name="message"
-                rows={4}
+                rows={3}
                 value={formData.message}
                 onChange={handleChange}
                 placeholder="Tell us about your story, timeline, venue location, or specific ideas..."
-                className="w-full px-4 py-3 bg-secondary/10 border border-border text-xs text-foreground placeholder-muted-foreground/60 transition-colors focus:border-accent focus:ring-1 focus:ring-accent resize-none"
+                className="w-full resize-none border border-border bg-secondary/10 px-2 py-1.5 text-[9px] text-foreground placeholder-muted-foreground/60 transition-colors focus:border-accent focus:ring-1 focus:ring-accent sm:px-4 sm:py-3 sm:text-xs"
               />
             </div>
 
@@ -213,7 +210,7 @@ export default function BookingForm() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-4 bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground disabled:bg-primary/65 disabled:text-primary-foreground/65 text-xs font-semibold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2"
+              className="flex w-full items-center justify-center gap-2 bg-primary py-2 text-[9px] font-semibold uppercase tracking-widest text-primary-foreground transition-all duration-300 hover:bg-accent hover:text-accent-foreground disabled:bg-primary/65 disabled:text-primary-foreground/65 sm:py-4 sm:text-xs"
             >
               {isSubmitting ? (
                 <>

@@ -70,20 +70,18 @@ export default function Navigation() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isHomePage && !isScrolled ? '-translate-y-full opacity-0 pointer-events-none' : ''
-        } ${
-          navigationIsSolid
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isHomePage && !isScrolled ? '-translate-y-full opacity-0 pointer-events-none' : ''
+          } ${navigationIsSolid
             ? 'glass-nav py-4 shadow-cinematic'
             : 'bg-gradient-to-b from-black/70 to-transparent py-6'
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex flex-col items-center">
-              <img 
-                src={brand.logoPath} 
+              <img
+                src={brand.logoPath}
                 alt={brand.name}
                 className="h-12 md:h-16 w-auto hover:opacity-85 transition-opacity"
               />
@@ -95,13 +93,12 @@ export default function Navigation() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-xs uppercase tracking-wider font-medium hover:text-accent transition-colors duration-250 relative group ${
-                    isActive(link.href)
+                  className={`text-xs uppercase tracking-wider font-medium hover:text-accent transition-colors duration-250 relative group ${isActive(link.href)
                       ? 'text-accent'
                       : navigationIsSolid
                         ? 'text-foreground'
                         : 'text-white'
-                  }`}
+                    }`}
                 >
                   {link.name}
                   <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ${isActive(link.href) ? 'scale-x-100' : ''}`} />
@@ -113,11 +110,10 @@ export default function Navigation() {
             <div className="hidden md:block">
               <Link
                 href="/contact"
-                className={`px-5 py-2.5 text-xs uppercase tracking-widest font-semibold transition-all duration-300 border shadow-cinematic ${
-                  isScrolled
+                className={`px-5 py-2.5 text-xs uppercase tracking-widest font-semibold transition-all duration-300 border shadow-cinematic ${isScrolled
                     ? 'bg-accent text-accent-foreground border-accent hover:bg-accent/90 hover:shadow-tan-glow'
                     : 'bg-accent text-accent-foreground border-accent hover:bg-accent/90 hover:shadow-tan-glow'
-                }`}
+                  }`}
               >
                 Book a Session
               </Link>
@@ -149,8 +145,8 @@ export default function Navigation() {
             {/* Header with Logo and Close Button */}
             <div className="flex items-center justify-between px-6 py-6 border-b border-border">
               <Link href="/" onClick={() => setIsOpen(false)}>
-                <img 
-                  src={brand.logoPath} 
+                <img
+                  src={brand.logoPath}
                   alt={brand.name}
                   className="h-12 w-auto"
                 />
@@ -176,9 +172,8 @@ export default function Navigation() {
                 >
                   <Link
                     href={link.href}
-                    className={`block text-center text-xl uppercase tracking-widest font-semibold hover:text-accent transition-colors py-4 ${
-                      isActive(link.href) ? 'text-accent' : 'text-foreground'
-                    }`}
+                    className={`block text-center text-xl uppercase tracking-widest font-semibold hover:text-accent transition-colors py-4 ${isActive(link.href) ? 'text-accent' : 'text-foreground'
+                      }`}
                   >
                     {link.name}
                   </Link>

@@ -84,15 +84,15 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-black px-6">
-      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl">
+    <main className="flex min-h-screen w-full items-center justify-center bg-[#C59B6B] px-6 py-10">
+      <div className="login-card w-full max-w-md rounded-[8px] border border-[#C59B6B]/40 bg-[#EEECE9] p-10 text-[#111111] shadow-[0_15px_40px_rgba(0,0,0,0.18)]">
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-semibold text-black">
-            Roma
+          <h1 className="text-3xl font-bold tracking-tight text-[#111111]">
+            Admin Login
           </h1>
 
-          <p className="mt-2 text-sm text-gray-500">
-            Admin Dashboard
+          <p className="mt-2 text-sm text-[#777777]">
+            Sign in to access the admin dashboard
           </p>
         </div>
 
@@ -100,7 +100,7 @@ export default function AdminLoginPage() {
           <div>
             <label
               htmlFor="email"
-              className="mb-2 block text-sm font-medium text-gray-700"
+              className="mb-2 block text-sm font-medium text-[#111111]"
             >
               Email
             </label>
@@ -112,14 +112,14 @@ export default function AdminLoginPage() {
               onChange={(event) => setEmail(event.target.value)}
               placeholder="Admin email"
               required
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-black"
+              className="w-full rounded-[6px] border border-[#C59B6B]/60 bg-[#F5F3F0] px-4 py-3 text-[#111111] outline-none transition focus:border-[#C59B6B] focus:ring-[3px] focus:ring-[#C59B6B]/[0.18]"
             />
           </div>
 
           <div>
             <label
               htmlFor="password"
-              className="mb-2 block text-sm font-medium text-gray-700"
+              className="mb-2 block text-sm font-medium text-[#111111]"
             >
               Password
             </label>
@@ -131,18 +131,18 @@ export default function AdminLoginPage() {
               onChange={(event) => setPassword(event.target.value)}
               placeholder="Password"
               required
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-black"
+              className="w-full rounded-[6px] border border-[#C59B6B]/60 bg-[#F5F3F0] px-4 py-3 text-[#111111] outline-none transition focus:border-[#C59B6B] focus:ring-[3px] focus:ring-[#C59B6B]/[0.18]"
             />
           </div>
 
           {error && (
-            <div className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600">
+            <div className="rounded-[6px] border border-[#C59B6B]/60 bg-[#F5F3F0] px-4 py-3 text-sm text-[#111111]">
               {error}
             </div>
           )}
 
           {message && (
-            <div className="rounded-lg bg-green-50 px-4 py-3 text-sm text-green-600">
+            <div className="rounded-[6px] border border-[#C59B6B]/60 bg-[#F5F3F0] px-4 py-3 text-sm text-[#111111]">
               {message}
             </div>
           )}
@@ -150,7 +150,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-black px-4 py-3 font-medium text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60"
+            className="w-full rounded-[6px] border-none bg-[#000000] px-4 py-3 font-medium text-[#FFFFFF] transition-all duration-300 ease-in-out hover:bg-[#C59B6B] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {loading ? "Signing in..." : "Sign in"}
           </button>
@@ -160,13 +160,31 @@ export default function AdminLoginPage() {
           type="button"
           onClick={handleForgotPassword}
           disabled={resetLoading}
-          className="mt-5 w-full text-center text-sm text-gray-600 underline hover:text-black disabled:opacity-50"
+          className="mt-5 w-full text-center text-sm text-[#777777] underline transition-colors hover:text-[#C59B6B] disabled:opacity-50"
         >
           {resetLoading
             ? "Sending reset email..."
             : "Forgot password?"}
         </button>
       </div>
+
+      <style jsx>{`
+        .login-card {
+          animation: fadeUp 0.6s ease-out;
+        }
+
+        @keyframes fadeUp {
+          from {
+            opacity: 0;
+            transform: translateY(16px);
+          }
+
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </main>
   );
 }

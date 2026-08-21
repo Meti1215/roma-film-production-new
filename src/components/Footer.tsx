@@ -19,7 +19,7 @@ export default function Footer() {
     <footer className="bg-primary text-primary-foreground pt-16 pb-12 px-4 sm:px-6 lg:px-8 border-t border-border/10">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 items-start mb-12">
-          
+
           {/* Brand block */}
           <div className="col-span-1 md:col-span-5 space-y-4">
             <Link href="/" className="inline-block">

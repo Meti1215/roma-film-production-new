@@ -21,7 +21,7 @@ export default function Home() {
       <About />
       <Services showImages={false} />
       <PhotoGallery photos={brand.homePagePhotos} />
-      <VideoGallery fetchFromSupabase={false} />
+      <VideoGallery fetchFromSupabase={false} homeMobileTwoColumns />
       <Testimonials />
       <Packages />
       <Contact />

@@ -69,11 +69,10 @@ export default function PhotoGallery({ photos = brand.photos }: PhotoGalleryProp
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-3 py-1.5 text-[10px] md:text-xs uppercase tracking-wider font-semibold border transition-all duration-300 ${
-                  activeCategory === category
+                className={`px-3 py-1.5 text-[10px] md:text-xs uppercase tracking-wider font-semibold border transition-all duration-300 ${activeCategory === category
                     ? 'border-accent bg-accent text-accent-foreground'
                     : 'border-border bg-transparent text-foreground/75 hover:border-foreground/40'
-                }`}
+                  }`}
               >
                 {category}
               </button>
@@ -82,24 +81,24 @@ export default function PhotoGallery({ photos = brand.photos }: PhotoGalleryProp
         )}
 
         {/* Photos Grid */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-[repeat(4,22%)] lg:justify-between">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-[repeat(4,22%)] lg:justify-between">
           {filteredPhotos.map((photo) => (
             <div
               key={photo.src}
               onClick={() => openLightbox(photo.src)}
               className="group relative aspect-[3/4] cursor-pointer overflow-hidden bg-transparent photo-hover-trigger"
             >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  className="h-full w-full object-cover"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  loading="eager"
-                  priority
-                  quality={85}
-                  unoptimized={photo.src.startsWith('https://fnbxlfpzhhxyalzghbzr.supabase.co') || photo.src.includes('photo22.jpg') || photo.src.includes('photo21.jpg') || photo.src.includes('photo23.jpg') || photo.src.includes('photo24.jpg') || photo.src.includes('photo25.jpg') || photo.src.includes('photo26.jpg') || photo.src.includes('photo27.jpg') || photo.src.includes('photo28.jpg') || photo.src.includes('photo29.jpg') || photo.src.includes('photo30.jpg') || photo.src.includes('photo31.jpg') || photo.src.includes('photo32.jpg') || photo.src.includes('photo34.jpg') || photo.src.includes('photo35.jpg') || photo.src.includes('photo36.jpg')}
-                />
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                className="h-full w-full object-cover"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                loading="eager"
+                priority
+                quality={85}
+                unoptimized={photo.src.startsWith('https://fnbxlfpzhhxyalzghbzr.supabase.co') || photo.src.includes('photo22.jpg') || photo.src.includes('photo21.jpg') || photo.src.includes('photo23.jpg') || photo.src.includes('photo24.jpg') || photo.src.includes('photo25.jpg') || photo.src.includes('photo26.jpg') || photo.src.includes('photo27.jpg') || photo.src.includes('photo28.jpg') || photo.src.includes('photo29.jpg') || photo.src.includes('photo30.jpg') || photo.src.includes('photo31.jpg') || photo.src.includes('photo32.jpg') || photo.src.includes('photo34.jpg') || photo.src.includes('photo35.jpg') || photo.src.includes('photo36.jpg')}
+              />
 
               {/* Overlay on hover - only show for full gallery, not home page */}
               {!isHomePage && (
@@ -165,7 +164,7 @@ export default function PhotoGallery({ photos = brand.photos }: PhotoGalleryProp
                   unoptimized={photos[lightboxIndex].src.startsWith('https://fnbxlfpzhhxyalzghbzr.supabase.co') || photos[lightboxIndex].src.includes('photo22.jpg') || photos[lightboxIndex].src.includes('photo21.jpg') || photos[lightboxIndex].src.includes('photo23.jpg') || photos[lightboxIndex].src.includes('photo24.jpg') || photos[lightboxIndex].src.includes('photo25.jpg') || photos[lightboxIndex].src.includes('photo26.jpg') || photos[lightboxIndex].src.includes('photo27.jpg') || photos[lightboxIndex].src.includes('photo28.jpg') || photos[lightboxIndex].src.includes('photo29.jpg') || photos[lightboxIndex].src.includes('photo30.jpg') || photos[lightboxIndex].src.includes('photo31.jpg') || photos[lightboxIndex].src.includes('photo32.jpg') || photos[lightboxIndex].src.includes('photo34.jpg') || photos[lightboxIndex].src.includes('photo35.jpg') || photos[lightboxIndex].src.includes('photo36.jpg')}
                 />
               </motion.div>
-              
+
               {/* Image Description Footer */}
               <div className="absolute bottom-[-40px] left-0 right-0 text-center text-white/80 text-xs md:text-sm tracking-wider px-4">
                 <span className="font-heading italic">

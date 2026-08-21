@@ -102,6 +102,111 @@
 }
 
 @layer utilities {
+  /* Scoped admin palette; the login page keeps its existing visual treatment. */
+  .admin-theme {
+    --admin-background: #120D08;
+    --admin-secondary: #1A120C;
+    --admin-card: #24170D;
+    --admin-accent: #C59B6B;
+    --admin-accent-hover: #D2A873;
+    --admin-text: #FFFFFF;
+    --admin-muted: #C8C0B8;
+    --admin-border: #4A3420;
+    background: var(--admin-background);
+    color: var(--admin-text);
+  }
+
+  .admin-theme > main:not(:has(.login-card)) {
+    min-height: 100vh;
+    background-color: var(--admin-background) !important;
+    color: var(--admin-text) !important;
+  }
+
+  .admin-theme > main:not(:has(.login-card)) .bg-gray-100,
+  .admin-theme > main:not(:has(.login-card)) .bg-gray-50 {
+    background-color: var(--admin-background) !important;
+  }
+
+  .admin-theme > main:not(:has(.login-card)) .bg-gray-200,
+  .admin-theme > main:not(:has(.login-card)) .bg-gray-300 {
+    background-color: var(--admin-secondary) !important;
+  }
+
+  .admin-theme > main:not(:has(.login-card)) .bg-white {
+    background-color: var(--admin-card) !important;
+  }
+
+  .admin-theme > main:not(:has(.login-card)) .bg-black {
+    background-color: var(--admin-accent) !important;
+  }
+
+  .admin-theme > main:not(:has(.login-card)) .text-black,
+  .admin-theme > main:not(:has(.login-card)) .text-gray-700,
+  .admin-theme > main:not(:has(.login-card)) .text-gray-600,
+  .admin-theme > main:not(:has(.login-card)) .text-gray-500,
+  .admin-theme > main:not(:has(.login-card)) .text-gray-400 {
+    color: var(--admin-muted) !important;
+  }
+
+  .admin-theme > main:not(:has(.login-card)) .text-red-600,
+  .admin-theme > main:not(:has(.login-card)) .text-yellow-500,
+  .admin-theme > main:not(:has(.login-card)) .text-green-600 {
+    color: var(--admin-accent) !important;
+  }
+
+  .admin-theme > main:not(:has(.login-card)) .border-gray-300,
+  .admin-theme > main:not(:has(.login-card)) .border-red-300 {
+    border-color: var(--admin-border) !important;
+  }
+
+  .admin-theme > main:not(:has(.login-card)) .border-accent,
+  .admin-theme > main:not(:has(.login-card)) .border-red-300 {
+    border-color: var(--admin-accent) !important;
+  }
+
+  .admin-theme > main:not(:has(.login-card)) input,
+  .admin-theme > main:not(:has(.login-card)) select,
+  .admin-theme > main:not(:has(.login-card)) textarea {
+    background-color: var(--admin-secondary) !important;
+    border-color: var(--admin-border) !important;
+    color: var(--admin-text) !important;
+  }
+
+  .admin-theme > main:not(:has(.login-card)) input::placeholder,
+  .admin-theme > main:not(:has(.login-card)) textarea::placeholder {
+    color: var(--admin-muted) !important;
+  }
+
+  .admin-theme > main:not(:has(.login-card)) input:focus,
+  .admin-theme > main:not(:has(.login-card)) select:focus,
+  .admin-theme > main:not(:has(.login-card)) textarea:focus {
+    border-color: var(--admin-accent) !important;
+    box-shadow: 0 0 0 3px rgba(197, 155, 107, 0.16);
+  }
+
+  .admin-theme > main:not(:has(.login-card)) .hover\:bg-gray-50:hover,
+  .admin-theme > main:not(:has(.login-card)) .hover\:bg-gray-800:hover,
+  .admin-theme > main:not(:has(.login-card)) .hover\:bg-red-50:hover,
+  .admin-theme > main:not(:has(.login-card)) .hover\:bg-red-700:hover {
+    background-color: var(--admin-accent-hover) !important;
+    color: var(--admin-background) !important;
+  }
+
+  .admin-theme > main:not(:has(.login-card)) .bg-red-50 {
+    background-color: var(--admin-secondary) !important;
+    border: 1px solid var(--admin-border);
+  }
+
+  .admin-theme > main:not(:has(.login-card)) .bg-red-600 {
+    background-color: var(--admin-accent) !important;
+    color: var(--admin-background) !important;
+  }
+
+  .admin-theme > main:not(:has(.login-card)) .hover\:border-accent:hover,
+  .admin-theme > main:not(:has(.login-card)) .hover\:border-gray-50:hover {
+    border-color: var(--admin-accent-hover) !important;
+  }
+
   .pt-navbar {
     padding-top: var(--navbar-height);
   }

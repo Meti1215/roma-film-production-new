@@ -15,8 +15,22 @@ interface Package {
   cta_text: string;
 }
 
-export default function Packages() {
-  const [packages, setPackages] = useState<Package[]>([]);
+function getFallbackPackages(): Package[] {
+  return brand.packages.map((pkg: any) => ({
+    id: pkg.title,
+    title: pkg.title,
+    subtitle: pkg.subtitle,
+    price: null,
+    features: pkg.features,
+    highlighted: pkg.highlighted || false,
+    cta_text: pkg.ctaText,
+  }));
+}
+
+export default function Packages({ bypassLoading = false }: { bypassLoading?: boolean }) {
+  const [packages, setPackages] = useState<Package[]>(() =>
+    bypassLoading ? getFallbackPackages() : []
+  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -29,25 +43,17 @@ export default function Packages() {
         }
 
         const data = await response.json();
-        
+
         if (data.error) {
           throw new Error(data.error);
         }
-        
+
         setPackages(data.packages || []);
       } catch (err) {
         console.error('Failed to fetch packages:', err);
         setError('Failed to load packages');
         // Fallback to brand packages if Supabase fails
-        setPackages(brand.packages.map((pkg: any) => ({
-          id: pkg.title,
-          title: pkg.title,
-          subtitle: pkg.subtitle,
-          price: null,
-          features: pkg.features,
-          highlighted: pkg.highlighted || false,
-          cta_text: pkg.ctaText,
-        })));
+        setPackages(getFallbackPackages());
       } finally {
         setLoading(false);
       }
@@ -70,7 +76,7 @@ export default function Packages() {
     }).format(price);
   }
 
-  if (loading) {
+  if (loading && !bypassLoading) {
     return (
       <section id="packages" className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-secondary/30">
         <div className="max-w-7xl mx-auto">
@@ -125,11 +131,10 @@ export default function Packages() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.6, ease: 'easeOut', delay: idx * 0.1 }}
-                className={`bg-card p-8 border flex flex-col justify-between items-stretch transition-all duration-300 relative ${
-                  pkg.highlighted
+                className={`bg-card p-8 border flex flex-col justify-between items-stretch transition-all duration-300 relative ${pkg.highlighted
                     ? 'border-accent shadow-cinematic scale-[1.02]'
                     : 'border-border/60 hover:border-accent/40 shadow-sm hover:shadow-cinematic'
-                }`}
+                  }`}
               >
                 {/* Highlight Badge */}
                 {pkg.highlighted && (
@@ -146,14 +151,14 @@ export default function Packages() {
                   <p className="text-[10px] text-muted-foreground italic mb-4 font-light">
                     {pkg.subtitle}
                   </p>
-                  
+
                   {/* Price Display */}
                   {pkg.price && (
                     <p className="text-2xl font-heading font-semibold text-accent mb-4">
                       {formatPrice(pkg.price)}
                     </p>
                   )}
-                  
+
                   <div className="w-8 h-[1px] bg-gradient-to-r from-transparent via-accent/60 to-transparent mb-6" />
 
                   {/* Bullet points */}
@@ -172,11 +177,10 @@ export default function Packages() {
                   href={actionLink}
                   target={isCustom ? '_self' : '_blank'}
                   rel="noopener noreferrer"
-                  className={`w-full py-3 text-center text-[10px] uppercase tracking-widest font-semibold border transition-all duration-250 ${
-                    pkg.highlighted
+                  className={`w-full py-3 text-center text-[10px] uppercase tracking-widest font-semibold border transition-all duration-250 ${pkg.highlighted
                       ? 'bg-primary text-primary-foreground border-transparent hover:bg-accent hover:text-accent-foreground'
                       : 'bg-transparent text-foreground border-border hover:border-accent hover:text-accent'
-                  }`}
+                    }`}
                 >
                   {pkg.cta_text}
                 </a>

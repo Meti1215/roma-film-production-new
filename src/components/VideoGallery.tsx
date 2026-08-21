@@ -25,9 +25,10 @@ interface LegacyVideo {
 
 interface VideoGalleryProps {
   fetchFromSupabase?: boolean
+  homeMobileTwoColumns?: boolean
 }
 
-export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryProps) {
+export default function VideoGallery({ fetchFromSupabase = true, homeMobileTwoColumns = false }: VideoGalleryProps) {
   const [videos, setVideos] = useState<LegacyVideo[]>(brand.videos);
   const [activeVideoUrl, setActiveVideoUrl] = useState<string | null>(null)
   const [activeVideoTitle, setActiveVideoTitle] = useState<string>('')
@@ -88,11 +89,11 @@ export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryP
         }
 
         const data = await response.json();
-        
+
         if (data.error) {
           throw new Error(data.error);
         }
-        
+
         // Map Supabase videos to legacy format
         const mappedVideos = (data.videos || []).map((video: Video) => {
           // Use custom thumbnail if provided, otherwise use YouTube thumbnail for YouTube videos, or fallback
@@ -113,7 +114,7 @@ export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryP
             videoUrl: video.video_url,
           };
         });
-        
+
         // Combine with existing brand videos
         setVideos([...mappedVideos, ...brand.videos]);
       } catch (err) {
@@ -155,7 +156,7 @@ export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryP
         </div>
 
         {/* Video Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
+        <div className={`${homeMobileTwoColumns ? 'grid grid-cols-2 sm:grid-cols-2 gap-4 md:gap-8 lg:gap-12' : 'grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 lg:gap-12'}`}>
           {videos.map((video, idx) => (
             <motion.div
               key={`${video.title}-${idx}`}
@@ -217,7 +218,7 @@ export default function VideoGallery({ fetchFromSupabase = true }: VideoGalleryP
                     {video.subtitle}
                   </span>
                 </div>
-                
+
                 <span className="px-2.5 py-1 sm:px-3 sm:py-1 border border-border text-[8px] sm:text-[9px] uppercase tracking-widest font-semibold text-muted-foreground whitespace-nowrap">
                   {video.category}
                 </span>

@@ -10,7 +10,7 @@ export default function PackagesPage() {
     <main className="relative min-h-screen bg-background">
       <Navigation />
       <div className="pt-20">
-        <Packages />
+        <Packages bypassLoading />
       </div>
       <Footer />
     </main>

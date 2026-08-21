@@ -41,10 +41,10 @@ function InstagramIcon({ className }: { className?: string }) {
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-background">
+    <section id="contact" className="bg-background px-2 py-6 sm:px-6 sm:py-20 md:py-32 lg:px-8">
       <div className="max-w-7xl mx-auto">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-stretch">
+        <div className="grid grid-cols-2 items-stretch gap-2 sm:gap-8 lg:grid-cols-12 lg:gap-20">
           
           {/* Info Side */}
           <motion.div
@@ -52,87 +52,87 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="lg:col-span-5 flex flex-col justify-between"
+            className="min-w-0 lg:col-span-5 flex flex-col justify-between"
           >
             <div>
               <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-accent mb-3 block">
                 Get In Touch
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-medium tracking-wide mb-6 text-foreground">
+              <h2 className="mb-3 text-lg font-heading font-medium tracking-wide text-foreground sm:mb-6 sm:text-4xl md:text-5xl">
                 Let's Capture Your Story
               </h2>
-              <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent mb-8" />
-              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-10 font-light max-w-md">
+              <div className="mb-3 h-[1px] w-10 bg-gradient-to-r from-transparent via-accent to-transparent sm:mb-8 sm:w-16" />
+              <p className="mb-3 max-w-md text-[9px] font-light leading-relaxed text-muted-foreground sm:mb-10 sm:text-sm">
                 We'd love to hear more about your upcoming wedding, engagement session, or event celebration. Fill out the form or reach out directly to learn more.
               </p>
 
               {/* Direct Info list */}
-              <div className="space-y-6 mb-10">
+              <div className="mb-3 space-y-2 sm:mb-10 sm:space-y-6">
                 {/* Phone */}
                 <a
                   href={brand.phoneHref}
-                  className="flex items-center gap-4 text-foreground/80 hover:text-accent transition-colors duration-200 group"
+                  className="group flex min-w-0 items-center gap-2 text-foreground/80 transition-colors duration-200 hover:text-accent sm:gap-4"
                 >
-                  <div className="w-10 h-10 border border-border flex items-center justify-center group-hover:border-accent/50 transition-colors shadow-sm">
-                    <Phone className="w-4 h-4 text-accent" />
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center border border-border shadow-sm transition-colors group-hover:border-accent/50 sm:h-10 sm:w-10">
+                    <Phone className="h-3 w-3 text-accent sm:h-4 sm:w-4" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <span className="block text-[8px] uppercase tracking-wider text-muted-foreground font-semibold">Call / Text</span>
-                    <span className="text-sm font-semibold">{brand.phone}</span>
+                    <span className="text-[9px] font-semibold sm:text-sm">{brand.phone}</span>
                   </div>
                 </a>
 
                 {/* Email */}
                 <a
                   href={brand.emailHref}
-                  className="flex items-center gap-4 text-foreground/80 hover:text-accent transition-colors duration-200 group"
+                  className="group flex min-w-0 items-center gap-2 text-foreground/80 transition-colors duration-200 hover:text-accent sm:gap-4"
                 >
-                  <div className="w-10 h-10 border border-border flex items-center justify-center group-hover:border-accent/50 transition-colors shadow-sm">
-                    <Mail className="w-4 h-4 text-accent" />
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center border border-border shadow-sm transition-colors group-hover:border-accent/50 sm:h-10 sm:w-10">
+                    <Mail className="h-3 w-3 text-accent sm:h-4 sm:w-4" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <span className="block text-[8px] uppercase tracking-wider text-muted-foreground font-semibold">Email</span>
-                    <span className="text-sm font-semibold">{brand.email}</span>
+                    <span className="break-words text-[9px] font-semibold sm:text-sm">{brand.email}</span>
                   </div>
                 </a>
 
                 {/* Location */}
-                <div className="flex items-center gap-4 text-foreground/80">
-                  <div className="w-10 h-10 border border-border flex items-center justify-center shadow-sm">
-                    <MapPin className="w-4 h-4 text-accent" />
+                <div className="flex min-w-0 items-center gap-2 text-foreground/80 sm:gap-4">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center border border-border shadow-sm sm:h-10 sm:w-10">
+                    <MapPin className="h-3 w-3 text-accent sm:h-4 sm:w-4" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <span className="block text-[8px] uppercase tracking-wider text-muted-foreground font-semibold">Location</span>
-                    <span className="text-sm font-semibold">{brand.locationName}</span>
+                    <span className="text-[9px] font-semibold sm:text-sm">{brand.locationName}</span>
                   </div>
                 </div>
               </div>
 
               {/* Social Media Links */}
-              <div className="flex items-center gap-3 mb-10">
+              <div className="mb-3 flex items-center gap-1 sm:mb-10 sm:gap-3">
                 <a
                   href={brand.socials.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram Profile"
-                  className="w-10 h-10 border border-border flex items-center justify-center hover:border-accent hover:text-accent transition-all duration-300 shadow-sm hover:shadow-cinematic"
+                  className="flex h-7 w-7 items-center justify-center border border-border shadow-sm transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-cinematic sm:h-10 sm:w-10"
                 >
-                  <InstagramIcon className="w-4 h-4" />
+                  <InstagramIcon className="h-3 w-3 sm:h-4 sm:w-4" />
                 </a>
                 <a
                   href={brand.socials.tiktok}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="TikTok Profile"
-                  className="w-10 h-10 border border-border flex items-center justify-center hover:border-accent hover:text-accent transition-all duration-300 shadow-sm hover:shadow-cinematic"
+                  className="flex h-7 w-7 items-center justify-center border border-border shadow-sm transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-cinematic sm:h-10 sm:w-10"
                 >
-                  <TikTokIcon className="w-4 h-4" />
+                  <TikTokIcon className="h-3 w-3 sm:h-4 sm:w-4" />
                 </a>
               </div>
             </div>
 
             {/* Google Map Embed Placeholder Container */}
-            <div className="relative w-full h-44 sm:h-52 bg-secondary/30 border border-accent/20 overflow-hidden mt-auto shadow-cinematic">
+            <div className="relative mt-auto h-20 w-full overflow-hidden border border-accent/20 bg-secondary/30 shadow-cinematic sm:h-52">
               <iframe
                 src={brand.googleMapsEmbedUrl}
                 title="Office Location Map"
@@ -156,7 +156,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-            className="lg:col-span-7 flex flex-col justify-center"
+            className="min-w-0 lg:col-span-7 flex flex-col justify-center"
           >
             <BookingForm />
           </motion.div>
